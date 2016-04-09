@@ -7,7 +7,7 @@ public class Partie
 	//Nombre de main passé durant une partie
 	private int nbMain;
 	
-	private static boolean debug = false;
+	private static boolean debug = true;
 	
 	
 	public Partie(IPlayer players[])
@@ -67,7 +67,7 @@ public class Partie
 		 IPlayer p = plateau.whoStart();
 		 for(int i=0;i<13;i++)
 		 {
-			 if(debug)System.out.println("\nNouveau manche: "+(i+1));
+			 if(debug)System.out.println("\nNouvelle manche: "+(i+1));
 			 p = newTurn(p);
 		 }
 		 

@@ -35,12 +35,12 @@ public class InteractePlayer extends abstractPlayer implements IPlayer
 	{
 		Carte[] r = new Carte[3];int t[] = new int[3];
 		
-		System.out.println("Chosiir les 3 cartes à échanger.");
+		System.out.println("Chosiir les 3 cartes  changer.");
 		System.out.println("Cartes en main:");
 		Scanner in = new Scanner(System.in);
 		for(int i=0;i<3;i++)
 		{
-			System.out.print("Carte numéro: "+i);
+			System.out.print("Carte numro: "+i);
 			t[i]=in.nextInt();
 			r[i]=carteEnMain.get(t[i]);
 		}

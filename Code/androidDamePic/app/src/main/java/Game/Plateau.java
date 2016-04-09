@@ -18,7 +18,7 @@ public class Plateau implements Game.IPlateau
 	//True si un coeur a été joué, false sinon
 	private boolean coeurPlayed;
 	
-	private static boolean debug = false;
+	private static boolean debug = true;
 	
 	public Plateau(IPlayer[] p)
 	{

@@ -38,14 +38,14 @@ public class IAPlayer extends abstractPlayer implements IPlayer
 	
 	
 	
-/*Fonction qui a pour but d'échanger les 3 plus mauvaise carte en début de jeu*/
+/*Fonction qui a pour but d'changer les 3 plus mauvaise carte en dbut de jeu*/
 	public Carte[] exchangeCards()
 	{
-		Carte[] Echange = new Carte[3]; // déclaration du tableau de 3 carte qui sera renvoyé
+		Carte[] Echange = new Carte[3]; // dclaration du tableau de 3 carte qui sera renvoyï¿½
 		Carte carteEnMainTab[]=carteEnMain.toArray(new Carte[carteEnMain.size()]);
 		//Carte[] PlayableC = plateau.playableCards(carteEnMainTab);
 		
-		if(DameDePique(carteEnMainTab) != null)// Si DdP priorité à échanger celle ci sinon échanger 3 + fort
+		if(DameDePique(carteEnMainTab) != null)// Si DdP priorithanger celle ci sinon changer 3 + fort
 		{
 			Echange[0] = DameDePique(carteEnMainTab);
 			DeleteCard(Echange[0]);
@@ -81,7 +81,7 @@ public class IAPlayer extends abstractPlayer implements IPlayer
 		
 	}
 	
-	/*Fonction jouer au second ou au troisième tour*/
+	/*Fonction jouer au second ou au troisiï¿½me tour*/
 	public Carte playCardSecondThird()
 	{
 		Carte r = null;
@@ -91,15 +91,15 @@ public class IAPlayer extends abstractPlayer implements IPlayer
 		Carte carteEnMainTab[]=carteEnMain.toArray(new Carte[carteEnMain.size()]);
 		Carte[] PlayableC = plateau.playableCards(carteEnMainTab);
 	    
-		if(SameColor(FirstPlayedCard ,carteEnMainTab) == true)// Si meme couleur présente dans la main que la 1ere carte jouée
+		if(SameColor(FirstPlayedCard ,carteEnMainTab) == true)// Si meme couleur prï¿½sente dans la main que la 1ere carte jouï¿½e
 		{
 			if((r=InfCloserCard(FirstPlayedCard, PlayableC))!=null);
 			else if((r=SupCloserCard(FirstPlayedCard, PlayableC)) !=null); // sinon jouer plus gros
 		}
-		else // Si pas la meme couleur présente dans la main
+		else // Si pas la meme couleur prï¿½sente dans la main
 		{
-			if((r=DameDePique(PlayableC)) != null); // Jouer en priorité Dame de pique si présente
-			else if((r=HigherCoeur(PlayableC)) !=null); // Jouer en priorité gros coeur si présent
+			if((r=DameDePique(PlayableC)) != null); // Jouer en prioritï¿½ Dame de pique si prï¿½sente
+			else if((r=HigherCoeur(PlayableC)) !=null); // Jouer en prioritï¿½ gros coeur si prï¿½sent
 			else if ((r=HigherCard(PlayableC)) !=null);
 		}
 		DeleteCard(r);
@@ -119,15 +119,15 @@ public class IAPlayer extends abstractPlayer implements IPlayer
 		Carte[] PlayableC = plateau.playableCards(carteEnMainTab);
 		
 	
-		if(SameColor(FirstPlayedCard ,PlayableC) == true)// Si meme couleur présente dans la main que la 1ere carte jouée
+		if(SameColor(FirstPlayedCard ,PlayableC) == true)// Si meme couleur prsente dans la main que la 1ere carte joue
 		{
 			if((r=InfCloserCard(FirstPlayedCard, PlayableC))!=null);
 			else if((r=HigherCardSameColor(FirstPlayedCard, PlayableC)) !=null); // sinon jouer plus gros
 		}
-		else // Si pas la meme couleur présente dans la main
+		else // Si pas la meme couleur prsente dans la main
 		{
-			if((r=DameDePique(PlayableC)) != null); // Jouer en priorité Dame de pique si présente
-			else if((r=HigherCoeur(PlayableC)) !=null); // Jouer en priorité gros coeur si présent
+			if((r=DameDePique(PlayableC)) != null); // Jouer en priorit Dame de pique si prï¿½sente
+			else if((r=HigherCoeur(PlayableC)) !=null); // Jouer en priorit gros coeur si prï¿½sent
 			else if ((r=HigherCard(PlayableC)) !=null);
 		}
 		
@@ -136,7 +136,7 @@ public class IAPlayer extends abstractPlayer implements IPlayer
 		
 	}
 	
-	/*Compare la main à la carte selectionnée et retourne toutes les cartes de la meme couleur*/
+	/*Compare la main ï¿½ la carte selectionnï¿½e et retourne toutes les cartes de la meme couleur*/
 	public boolean SameColor(Carte FirstPlayedCard, Carte[] PlayableC)
 	{
 		for(Carte c : PlayableC )
@@ -146,7 +146,7 @@ public class IAPlayer extends abstractPlayer implements IPlayer
 					
 	}
 	
-	/* Retourne la carte la plus grosse des cartes reçus*/
+	/* Retourne la carte la plus grosse des cartes reï¿½us*/
 	public Carte HigherCard(Carte[] PlayableC)
 	{
 		Carte Higher=null;
@@ -160,7 +160,7 @@ public class IAPlayer extends abstractPlayer implements IPlayer
 		return Higher;
 	}
 	
-	/* Retourne la carte la plus petite des cartes reçus*/
+	/* Retourne la carte la plus petite des cartes reï¿½us*/
 	public Carte LowerCard(Carte[] PlayableC) 
 	{
 		Carte Lower=null;
@@ -177,7 +177,7 @@ public class IAPlayer extends abstractPlayer implements IPlayer
 			return null;
 	}
 	
-	/* Retourne la carte de valeur la plus grosse tout en étant inferieur à la carte comparée*/
+	/* Retourne la carte de valeur la plus grosse tout en ï¿½tant inferieur ï¿½ la carte comparï¿½e*/
 	public Carte InfCloserCard(Carte FirstPlayedCard,Carte[] PlayableC)
 	{
 		Carte Higher=null;
@@ -196,7 +196,7 @@ public class IAPlayer extends abstractPlayer implements IPlayer
 	}
 	
 	
-	/* Retourne la carte de valeur la plus petite tout en étant supérieur à la carte comparée*/
+	/* Retourne la carte de valeur la plus petite tout en ï¿½tant supï¿½rieur ï¿½ la carte comparï¿½e*/
 	public Carte SupCloserCard(Carte FirstPlayedCard,Carte[] PlayableC)
 	{
 		Carte Higher=null;
@@ -213,7 +213,7 @@ public class IAPlayer extends abstractPlayer implements IPlayer
 		return null;
 	}
 	
-	/* Retourne la carte de valeur la plus forte de la meme couleur que la carte comparée*/
+	/* Retourne la carte de valeur la plus forte de la meme couleur que la carte comparï¿½e*/
 	public Carte HigherCardSameColor(Carte FirstPlayedCard,Carte[] PlayableC)
 	{
 		Carte Higher=null;
@@ -231,7 +231,7 @@ public class IAPlayer extends abstractPlayer implements IPlayer
 	}
 	
 	
-	/*Retourne Dame de Pique si présente*/
+	/*Retourne Dame de Pique si prï¿½sente*/
 	public Carte DameDePique(Carte[] PlayableC)
 	{
 		for(Carte c : PlayableC )
@@ -240,7 +240,7 @@ public class IAPlayer extends abstractPlayer implements IPlayer
 		return null;
 	}
 	
-	/*Retourne la carte Coeur de valeur la plus élevé*/
+	/*Retourne la carte Coeur de valeur la plus ï¿½levï¿½*/
 	public Carte HigherCoeur(Carte[] PlayableC)
 	{
 		Carte Higher=null;
@@ -257,7 +257,7 @@ public class IAPlayer extends abstractPlayer implements IPlayer
 		return null;
 	}
 	
-	/*Supprime de la main la carte passée en argument*/
+	/*Supprime de la main la carte passï¿½e en argument*/
 	public void DeleteCard(Carte DelCard)
 	{
 		if(DelCard==null)	return;
@@ -274,7 +274,7 @@ public class IAPlayer extends abstractPlayer implements IPlayer
 	
 	public Carte compareBestCard(Carte[] c)
 	{
-		if(debug)	System.out.println("comapreBestCard: Longuer tab entré: "+c.length);
+		if(debug)	System.out.println("comapreBestCard: Longuer tab entrï¿½: "+c.length);
 		Carte r=c[0];
 		for(int i=1;i<c.length;i++)
 			if(r.isSameColor(c[i]) && r.getValue()<c[i].getValue())

@@ -12,7 +12,7 @@ public abstract class abstractPlayer
 	protected int points;
 	protected String id;
 	
-	protected static boolean debug = false;
+	protected static boolean debug = true;
 	
 	/* CONSTRUCTEUR
 	  Ne surtout pas oublier d'ajouter les lignes suivante des le construteurs des classe filles:
@@ -60,12 +60,12 @@ public abstract class abstractPlayer
 	
 	
 	/*Permet de trier la main pour la rendre plus humainement lisible
-	 * hand: Main du joueur à trier
-	 * return: main trié
+	 * hand: Main du joueur ï¿½ trier
+	 * return: main triï¿½
 	 */
 	protected ArrayList<Carte> sortHand(ArrayList<Carte> hand)
 	{
-		//On sépare les diférantes couleur
+		//On sï¿½pare les difï¿½rantes couleur
 		ArrayList<Carte> r = new ArrayList<Carte>();
 		ArrayList<ArrayList<Carte>> t = new ArrayList<ArrayList<Carte>>();
 		for(int i=0;i<4;i++)
@@ -78,7 +78,7 @@ public abstract class abstractPlayer
 		return r;
 	}
 	
-	//Tri les cartes par valeur, à n'utiliser que pour des cartes de même couleur. Ne pas appeler.
+	//Tri les cartes par valeur, ï¿½ n'utiliser que pour des cartes de mï¿½me couleur. Ne pas appeler.
 	protected ArrayList<Carte> sortCardArrayList(ArrayList<Carte> l)
 	{
 		System.out.println("Tri");

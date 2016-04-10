@@ -1,4 +1,19 @@
 package Game;
+/*
+
+	private Plateau plateau;
+	private int nbMain;
+	private static boolean debug = true;
+
+	public Partie(IPlayer players[])
+	public Partie()
+	public Plateau getPlateau();
+	public structGameStat newGame()
+	private int handPlayed()
+	private IPlayer newTurn(IPlayer firstPlayer)
+
+ */
+
 
 public class Partie
 {
@@ -18,9 +33,15 @@ public class Partie
 	
 	public Partie()
 	{
+
 		plateau = new Plateau();
 	}
-	
+
+	public Plateau getPlateau(){
+		return plateau;
+	}
+
+
 	/* Joue jusqu'à ce qu'un joueur attaigne 100 points
 	 * 
 	 */

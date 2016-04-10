@@ -5,10 +5,11 @@ import java.util.Scanner;
 
 import Game.Carte;
 import Game.IPlayer;
+import ceri.androiddamepic.TapisJeu;
 
 public class InteractePlayer extends abstractPlayer implements IPlayer
 {
-	
+	TapisJeu tapisAndroidP = null;
 	public InteractePlayer()
 	{
 		carteEnMain = new ArrayList<Carte>();
@@ -33,19 +34,24 @@ public class InteractePlayer extends abstractPlayer implements IPlayer
 	
 	public Carte[] exchangeCards()
 	{
-		Carte[] r = new Carte[3];int t[] = new int[3];
-		
-		System.out.println("Chosiir les 3 cartes  changer.");
-		System.out.println("Cartes en main:");
-		Scanner in = new Scanner(System.in);
+		Carte[] r = new Carte[3];
+		//int t[] = new int[3];
+		int t[] = tapisAndroidP.exchangeCardsPlayer(carteEnMain);
+		//System.out.println("Chosiir les 3 cartes  changer.");
+		//System.out.println("Cartes en main:");
+		//Scanner in = new Scanner(System.in);
 		for(int i=0;i<3;i++)
 		{
-			System.out.print("Carte numro: "+i);
-			t[i]=in.nextInt();
+			//System.out.print("Carte numro: "+i);
+			//t[i]=in.nextInt();
 			r[i]=carteEnMain.get(t[i]);
 		}
-		in.close();
+		//in.close();
 		carteEnMain.remove(t);
 		return r;
+	}
+
+	public void linkActivity(TapisJeu tapisAndroid){
+		tapisAndroidP = tapisAndroid;
 	}
 }

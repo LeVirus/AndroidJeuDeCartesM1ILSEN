@@ -24,10 +24,10 @@ public class InteractePlayer extends abstractPlayer implements IPlayer
 		Carte[] tmp = plateau.playableCards(carteEnMain.toArray(new Carte[carteEnMain.size()]));
 		afficheCartes(tmp);
 		Scanner in = new Scanner(System.in);
-		int i = in.nextInt();
+//		int i = in.nextInt();
 		in.close();
-		Carte r = carteEnMain.get(i);
-		carteEnMain.remove(i);
+		Carte r = carteEnMain.get(0);
+		carteEnMain.remove(0);
 		return r;
 	}
 	

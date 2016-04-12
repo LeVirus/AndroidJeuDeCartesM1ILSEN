@@ -1,26 +1,53 @@
 package ceri.androiddamepic;
 
 import android.content.Context;
-import android.support.v7.graphics.drawable.DrawableWrapper;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.drawable.BitmapDrawable;
 import android.widget.ImageButton;
 
 /**
  * Created by cyril on 10/04/16.
  */
-public class CarteUI extends ImageButton{
+public class CarteUI extends ImageButton {
     private int couleur;
     private int valeur;
     private int position;
     private boolean actif = false;
+    Bitmap bitmapCarte = null;
+    public Canvas canvas = null; // tmp
+    Paint paint = null;
+
 
 
 
     public CarteUI(Context c){
+
         super(c);
+        bitmapCarte = BitmapFactory.decodeResource(getResources(), R.drawable.textcarte);
     }
 
-    public CarteUI(Context c, int coul, int val, Texture texture_up, Texture texture_down, Texture background){
+    public void test(){
+        Bitmap b = bitmapCarte.createBitmap(bitmapCarte, 0, 0, 32, 32);
+
+        Bitmap mutableBitmap = b.copy(Bitmap.Config.ARGB_8888, true);
+        //canvas = new Canvas(mutableBitmap);
+        //paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
+        //canvas.clipRect(0, 0, 32, 32);
+        //canvas.drawRect(0, 0, 32, 32, paint);
+
+        BitmapDrawable drawable = new BitmapDrawable(getResources(), mutableBitmap);
+        this.setBackground(drawable);
+    }
+
+    public CarteUI(Context c, int coul, int val){
         super(c);
+        setParam(coul, val);
+    }
+
+    public void setParam(int coul, int val){
         couleur = coul;
         valeur = val;
     }
@@ -34,7 +61,7 @@ public class CarteUI extends ImageButton{
                 //pas de modif a faire
                 break;
             case 1://trefle
-                posY += 2 * distY;//134 est la distance entre 2 carte en hauteur
+                posY += 2 * distY;
                 break;
             case 2://carreau
                 posY += 1 * distY;
@@ -47,13 +74,27 @@ public class CarteUI extends ImageButton{
         }
 
       if(valeur == 14){
-          posX += distX;//91 est la distance entre 2 carte en largeur
+          posX += distX;
       }
       else{
           posX += distX * valeur;
       }
-        new DrawableWrapper();
-this.setBackground();
+
+        Bitmap b = bitmapCarte.createBitmap(bitmapCarte, posX, posY, tailleX, tailleY);
+
+        Bitmap mutableBitmap = b.copy(Bitmap.Config.ARGB_8888, true);
+        //canvas = new Canvas(mutableBitmap);
+        //paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
+        //canvas.clipRect(0, 0, 32, 32);
+        //canvas.drawRect(0, 0, 32, 32, paint);
+
+        BitmapDrawable drawable = new BitmapDrawable(getResources(), mutableBitmap);
+        this.setBackground(drawable);
+
+
+
+
+
     }
 
 }

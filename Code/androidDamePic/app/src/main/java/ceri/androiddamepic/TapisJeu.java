@@ -76,8 +76,6 @@ public class TapisJeu extends AppCompatActivity {
         ddd = (LinearLayout) findViewById(R.id.linear);
         ddd .setPadding(0, 15, 0, 0);
         mainJoueurUI = new CarteUI[13];
-
-        //ddd.addView(ca);
     }
 
     IPlayer creerJoueurInteract(String idd){

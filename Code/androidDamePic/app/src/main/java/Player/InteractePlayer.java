@@ -1,7 +1,6 @@
 package Player;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import Game.Carte;
 import Game.IPlayer;
@@ -18,16 +17,17 @@ public class InteractePlayer extends abstractPlayer implements IPlayer
 	
 	public Carte playCard()
 	{
-		System.out.println("Cartes en main:");
+		/*System.out.println("Cartes en main:");
 		afficheCartes(carteEnMain.toArray(new Carte[carteEnMain.size()]));
 		System.out.println("\n\nCartes jouable:");
 		Carte[] tmp = plateau.playableCards(carteEnMain.toArray(new Carte[carteEnMain.size()]));
-		afficheCartes(tmp);
-		Scanner in = new Scanner(System.in);
+		afficheCartes(tmp);*/
+		//Scanner in = new Scanner(System.in);
 //		int i = in.nextInt();
-		in.close();
-		Carte r = carteEnMain.get(0);
-		carteEnMain.remove(0);
+		//in.close();
+		int c = tapisAndroidP.playCard(carteEnMain);
+		Carte r = carteEnMain.get(c);
+		carteEnMain.remove(c);
 		return r;
 	}
 	
@@ -35,17 +35,23 @@ public class InteractePlayer extends abstractPlayer implements IPlayer
 	public Carte[] exchangeCards()
 	{
 		Carte[] r = new Carte[3];
+
+
 		//int t[] = new int[3];
 		int t[] = tapisAndroidP.exchangeCardsPlayer(carteEnMain);
 		//System.out.println("Chosiir les 3 cartes  changer.");
 		//System.out.println("Cartes en main:");
 		//Scanner in = new Scanner(System.in);
+
 		for(int i=0;i<3;i++)
 		{
 			//System.out.print("Carte numro: "+i);
 			//t[i]=in.nextInt();
 			r[i]=carteEnMain.get(t[i]);
 		}
+
+
+
 		//in.close();
 		carteEnMain.remove(t);
 		return r;

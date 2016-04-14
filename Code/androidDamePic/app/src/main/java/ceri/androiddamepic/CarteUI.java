@@ -3,9 +3,8 @@ package ceri.androiddamepic;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
+import android.view.View;
 import android.widget.ImageButton;
 
 /**
@@ -17,8 +16,9 @@ public class CarteUI extends ImageButton {
     private int position;
     private boolean actif = false;
     Bitmap bitmapCarte = null;
-    public Canvas canvas = null; // tmp
-    Paint paint = null;
+    //public Canvas canvas = null; // tmp
+    //Paint paint = null;
+    boolean selected = false;
 
 
 
@@ -27,7 +27,26 @@ public class CarteUI extends ImageButton {
 
         super(c);
         bitmapCarte = BitmapFactory.decodeResource(getResources(), R.drawable.textcarte);
+        setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selected = !selected;
+                System.out.print(selected+"select\n");
+            }
+        });
+
     }
+
+    public boolean isSelected(){
+        return selected;
+    }
+
+    public void setSelected(boolean b){
+        selected = b;
+    }
+
+
+
 
     public void test(){
         Bitmap b = bitmapCarte.createBitmap(bitmapCarte, 0, 0, 32, 32);
@@ -89,8 +108,12 @@ public class CarteUI extends ImageButton {
         //canvas.drawRect(0, 0, 32, 32, paint);
 
         BitmapDrawable drawable = new BitmapDrawable(getResources(), mutableBitmap);
-        this.setBackground(drawable);
-
+        try {
+            this.setBackground(drawable);
+        }
+        catch (Exception e){
+            //this.setBackground(drawable);
+        }
 
 
 

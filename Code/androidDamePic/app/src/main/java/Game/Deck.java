@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class Deck
 {
-	//Créer un paquet de 52 cartes mélanger
+	//Crï¿½er un paquet de 52 cartes mï¿½langer
 		static Carte[] createDeck()
 		{
 			Carte[] r = new Carte[52];int i=0;
@@ -35,4 +35,7 @@ public class Deck
 			for(int i=0;i<13;i++)	r[i] = new Carte(i,c);
 			return r;
 		}
+
+
+
 }

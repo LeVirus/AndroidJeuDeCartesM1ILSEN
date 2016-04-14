@@ -1,7 +1,6 @@
 package Player;
 
 import java.util.ArrayList;
-
 import Game.Carte;
 import Game.IPlayer;
 

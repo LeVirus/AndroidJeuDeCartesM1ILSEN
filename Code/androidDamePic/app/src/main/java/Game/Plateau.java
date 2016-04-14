@@ -204,7 +204,9 @@ public class Plateau implements Game.IPlateau
 	{
 		//Récupération des chartes à échanger
 		Carte[][] c = new Carte[4][];
-		if(nTour%4!=3)	for(int i=0;i<4;i++)	c[i] = players[i].exchangeCards();
+		if(nTour%4!=3)
+			for(int i=0;i<4;i++)
+				c[i] = players[i].exchangeCards();
 		
 		//Déstribution des cartes à échanger
 		switch (nTour%4)

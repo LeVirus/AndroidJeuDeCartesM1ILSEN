@@ -25,9 +25,10 @@ public class TapisJeu extends AppCompatActivity {
     IPlayer playerss[] = null;
     Partie partie = null;
     Plateau plateau = null;
-    LinearLayout ddd = null;
+    LinearLayout linearCards = null;
     RelativeLayout re = null;
-    CarteUI[] mainJoueurUI = null;
+    RelativeLayout surface[] = null;
+    CarteUI[] mainJoueurUI = null, cartePlateauUI;
     Activity tapisJeuActivity = null;
     Button valdButton = null;
     GameThread mThread = new GameThread();
@@ -45,14 +46,36 @@ public class TapisJeu extends AppCompatActivity {
 
     void initPlateau() {
         initValidateButton();
-        ddd = (LinearLayout) findViewById(R.id.linear);
-        re = (RelativeLayout) findViewById(R.id.relativeL);
-        ddd.setPadding(0, 15, 0, 0);
+        linearCards = (LinearLayout) findViewById(R.id.linear);
+        //grid = (GridLayout) findViewById(R.id.gridPlat);
+
+        //grid.addView(new CarteUI(this), new GridLayout.LayoutParams(1, 1));
+
+       // re = (RelativeLayout) findViewById(R.id.relativeL);
+        linearCards.setPadding(0, 15, 0, 0);
         mainJoueurUI = new CarteUI[13];
+
+        surface = new RelativeLayout[4];
+        cartePlateauUI= new CarteUI[4];
+
+        //Main joueur
         for(int i = 0; i < 13; ++i) {
             mainJoueurUI[i] = new CarteUI(this);
-            ddd.addView(mainJoueurUI[i]);
+            linearCards.addView(mainJoueurUI[i]);
         }
+
+        surface[0] = (RelativeLayout) findViewById(R.id.carteJ1);
+        surface[1] = (RelativeLayout) findViewById(R.id.carteJ2);
+        surface[2] = (RelativeLayout) findViewById(R.id.carteJ3);
+        surface[3] = (RelativeLayout) findViewById(R.id.carteJ4);
+
+        for(int i = 0; i < 4; ++i) {
+            cartePlateauUI[i] = new CarteUI(this);
+            surface[i].addView(cartePlateauUI[i]);
+        }
+
+        //Cartes jouées
+
         tapisJeuActivity = this;
     }
 
@@ -91,10 +114,20 @@ public class TapisJeu extends AppCompatActivity {
     }
 
     public void miseAJourTapis() {
+        Carte[] carteP = plateau.getPlayCards();
+        //Canvas canvas = new Canvas();
 
+        for(int i = 0 ; i < carteP.length; ++i){
+            if(carteP[i] == null)continue;
+            cartePlateauUI[i].setParam(carteP[i].getColor().getValue(), carteP[i].getValue());
+            //BitmapDrawable bm = cartePlateauUI[i].confImage();
+        }
     }
 
     public void afficherCarteJoueur(ArrayList<Carte> mainJoueur) {
+
+        reinitCards();
+        miseAJourTapis();
 
         int i = 0;
         for (Carte c : mainJoueur) {
@@ -103,11 +136,12 @@ public class TapisJeu extends AppCompatActivity {
             System.out.print(couleur + "coul\n");
             System.out.print(val + "val\n");
             if (i >= mainJoueurUI.length || mainJoueurUI[i] == null) {
+                System.out.print(i + "erreur ajout carte\n");
                 return;
             }
             mainJoueurUI[i].setParam(couleur, val);
             mainJoueurUI[i].confImage();
-            System.out.print(i + "affichCarte\n");
+            System.out.print(i + "affichCarte===============================================\n");
             i++;
         }
     }
@@ -138,9 +172,9 @@ public class TapisJeu extends AppCompatActivity {
 
     public int playCard(final ArrayList<Carte> mainJoueur){
         int it = -1;
+
         reinitCards();
         afficherCarteJoueur(mainJoueur);
-
         do {
             it = grantedExchangePlay();
             try {
@@ -156,7 +190,7 @@ public class TapisJeu extends AppCompatActivity {
         int mem = -1;
         int i = 0;
 
-        if(!validGranted ){
+        if(!validGranted ){//bouton valider a été pressé
             return -1;
         }
         validGranted = false;
@@ -194,7 +228,11 @@ public class TapisJeu extends AppCompatActivity {
     void reinitCards(){
         for(int i = 0; i < mainJoueurUI.length ;++i){
             mainJoueurUI[ i ].setSelected( false );
-
+            mainJoueurUI[i ].erasePic();
+        }
+        for(int i = 0; i < cartePlateauUI.length ;++i){
+            mainJoueurUI[ i ].setSelected( false );
+            mainJoueurUI[i ].erasePic();
         }
     }
 

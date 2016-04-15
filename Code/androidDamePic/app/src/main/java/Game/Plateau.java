@@ -18,7 +18,7 @@ public class Plateau implements Game.IPlateau
 	//True si un coeur a été joué, false sinon
 	private boolean coeurPlayed;
 	
-	private static boolean debug = true;
+	private static boolean debug = false;
 	
 	public Plateau(IPlayer[] p)
 	{
@@ -204,7 +204,8 @@ public class Plateau implements Game.IPlateau
 	{
 		//Récupération des chartes à échanger
 		Carte[][] c = new Carte[4][];
-		if(nTour%4!=3)
+		if(nTour%4==3)return;
+
 			for(int i=0;i<4;i++)
 				c[i] = players[i].exchangeCards();
 		

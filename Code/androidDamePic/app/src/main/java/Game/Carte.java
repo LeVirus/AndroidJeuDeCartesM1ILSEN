@@ -15,10 +15,10 @@ public class Carte
 	
 	//------------------------------------------------------------------METHODES
 	
-	//Retourne true si même couleur, false sinon.
+	//Retourne true si mme couleur, false sinon.
 	public boolean isSameColor(Carte card){return (card.getColor().isSame(c));}
 	
-	//Retourne 0 si égale | 1 si this > card et -1 si this < card
+	//Retourne 0 si gale | 1 si this > card et -1 si this < card
 	public int compareValue(Carte card){return (v==card.getValue())?0:(v>card.getValue())?1:-1;}
 	
 	//Retourne true si les cartes sont identiques, false sinon.
@@ -36,7 +36,7 @@ public class Carte
 		return r+" de "+c.getName();
 	}
 	
-	//Retourne les points que valent la carte à la dame de pique
+	//Retourne les points que valent la carte a la dame de pique
 	public int getPoint()
 	{
 		return (this.c.isSame(color.coeur))?1:(this.c.isSame(color.pique)&&v==12)?13:0;

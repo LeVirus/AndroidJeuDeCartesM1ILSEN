@@ -2,11 +2,11 @@ package Game;
 
 public class structGameStat
 {
-	//Chaque tableau à une corespondance par i.
+	//Chaque tableau  une corespondance par i.
 	public String[] IAName;
 	public int[] point;
 	
-	public int nbMain;	//Nombre de main joué
+	public int nbMain;	//Nombre de main jou
 	
 	public structGameStat()
 	{

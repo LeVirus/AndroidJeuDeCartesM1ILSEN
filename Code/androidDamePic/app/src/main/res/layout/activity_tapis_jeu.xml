@@ -16,16 +16,11 @@
     tools:context="ceri.androiddamepic.TapisJeu">
 
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/imageView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="500dp"
+        android:layout_width="800dp"
         android:layout_height="100dp"
         android:id="@+id/linear"
 
@@ -41,4 +36,40 @@
         android:layout_below="@+id/linear"
         android:layout_alignParentEnd="true" />
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/carteJ1"
+        android:layout_below="@+id/linear"
+        android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/carteJ2"
+        android:layout_below="@+id/carteJ1"
+        android:layout_toStartOf="@+id/carteJ1"
+        android:layout_marginTop="46dp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/carteJ3"
+        android:layout_alignTop="@+id/carteJ2"
+        android:layout_toEndOf="@+id/carteJ1" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/carteJ4"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="25dp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/imageView"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

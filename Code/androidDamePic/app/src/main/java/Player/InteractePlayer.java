@@ -45,15 +45,21 @@ public class InteractePlayer extends abstractPlayer implements IPlayer
 
 		for(int i=0;i<3;i++)
 		{
-			//System.out.print("Carte numro: "+i);
-			//t[i]=in.nextInt();
+
 			r[i]=carteEnMain.get(t[i]);
+		}
+
+		System.out.print("carte::"+carteEnMain.size());
+		for(int i=2;i>=0;i--)
+		{
+
+			carteEnMain.remove(t[i]);
 		}
 
 
 
 		//in.close();
-		carteEnMain.remove(t);
+		System.out.print("carte::"+carteEnMain.size());
 		return r;
 	}
 

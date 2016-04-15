@@ -12,7 +12,7 @@ public abstract class abstractPlayer
 	protected int points;
 	protected String id;
 	
-	protected static boolean debug = true;
+	protected static boolean debug = false;
 	
 	/* CONSTRUCTEUR
 	  Ne surtout pas oublier d'ajouter les lignes suivante des le construteurs des classe filles:

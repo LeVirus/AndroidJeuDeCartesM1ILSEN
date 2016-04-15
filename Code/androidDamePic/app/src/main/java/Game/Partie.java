@@ -22,7 +22,7 @@ public class Partie
 	//Nombre de main passé durant une partie
 	private int nbMain;
 	
-	private static boolean debug = true;
+	private static boolean debug = false;
 	
 	
 	public Partie(IPlayer players[])

@@ -13,7 +13,7 @@ import android.widget.ImageButton;
 public class CarteUI extends ImageButton {
     private int couleur;
     private int valeur;
-    private int position;
+    //private int position;
     private boolean actif = false;
     Bitmap bitmapCarte = null;
     //public Canvas canvas = null; // tmp
@@ -30,6 +30,7 @@ public class CarteUI extends ImageButton {
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
+                if( actif == false)return;
                 selected = !selected;
                 System.out.print(selected+"select\n");
             }
@@ -38,27 +39,12 @@ public class CarteUI extends ImageButton {
     }
 
     public boolean isSelected(){
+        if( actif == false)return false;
         return selected;
     }
 
     public void setSelected(boolean b){
         selected = b;
-    }
-
-
-
-
-    public void test(){
-        Bitmap b = bitmapCarte.createBitmap(bitmapCarte, 0, 0, 32, 32);
-
-        Bitmap mutableBitmap = b.copy(Bitmap.Config.ARGB_8888, true);
-        //canvas = new Canvas(mutableBitmap);
-        //paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
-        //canvas.clipRect(0, 0, 32, 32);
-        //canvas.drawRect(0, 0, 32, 32, paint);
-
-        BitmapDrawable drawable = new BitmapDrawable(getResources(), mutableBitmap);
-        this.setBackground(drawable);
     }
 
     public CarteUI(Context c, int coul, int val){
@@ -71,10 +57,21 @@ public class CarteUI extends ImageButton {
         valeur = val;
     }
 
+    public void erasePic(){
+        actif = false;
+        try {
+            this.setBackground(null);
+        }catch (Exception e){
+            this.setBackground(null);
+        }
+
+    }
+
     //"coeur", 0,"trefle", 1, "carreau", 2, "pique", 3
-    void confImage(){
+    BitmapDrawable confImage(){
+        actif = true;
         //init des variables de texture
-        int posY=1, posX=1, tailleX =85, tailleY = 129, distX = 91, distY = 134;
+        int posY=2, posX=1, tailleX =85, tailleY = 128, distX = 91, distY = 134;
         switch(couleur){
             case 0://coeur
                 //pas de modif a faire
@@ -112,10 +109,10 @@ public class CarteUI extends ImageButton {
             this.setBackground(drawable);
         }
         catch (Exception e){
-            //this.setBackground(drawable);
+            this.setBackground(drawable);
         }
 
-
+        return drawable;
 
 
     }

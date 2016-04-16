@@ -26,6 +26,7 @@ public class InteractePlayer extends abstractPlayer implements IPlayer
 //		int i = in.nextInt();
 		//in.close();
 		int c = tapisAndroidP.playCard(carteEnMain);
+		System.out.println("Carteeee"+c);
 		Carte r = carteEnMain.get(c);
 		carteEnMain.remove(c);
 		return r;

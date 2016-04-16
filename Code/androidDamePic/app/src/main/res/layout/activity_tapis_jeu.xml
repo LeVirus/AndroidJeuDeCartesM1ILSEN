@@ -36,14 +36,14 @@
         android:layout_below="@+id/linear"
         android:layout_alignParentEnd="true" />
 
-    <RelativeLayout
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/carteJ1"
         android:layout_below="@+id/linear"
         android:layout_centerHorizontal="true" />
 
-    <RelativeLayout
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/carteJ2"
@@ -51,14 +51,14 @@
         android:layout_toStartOf="@+id/carteJ1"
         android:layout_marginTop="46dp" />
 
-    <RelativeLayout
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/carteJ3"
         android:layout_alignTop="@+id/carteJ2"
         android:layout_toEndOf="@+id/carteJ1" />
 
-    <RelativeLayout
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/carteJ4"

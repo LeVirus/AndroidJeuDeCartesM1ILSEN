@@ -1,14 +1,17 @@
 package ceri.androiddamepic;
 
 import android.app.Activity;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import Game.Carte;
 import Game.IPlayer;
@@ -22,16 +25,18 @@ public class TapisJeu extends AppCompatActivity {
 
     boolean partieLance = false;
     boolean validGranted = false;
+    boolean majGraph = false;
     IPlayer playerss[] = null;
     Partie partie = null;
     Plateau plateau = null;
     LinearLayout linearCards = null;
     RelativeLayout re = null;
-    RelativeLayout surface[] = null;
+    ImageView surface[] = null;
     CarteUI[] mainJoueurUI = null, cartePlateauUI;
     Activity tapisJeuActivity = null;
     Button valdButton = null;
     GameThread mThread = new GameThread();
+    ArrayList<Carte> mainJoueurT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,7 @@ public class TapisJeu extends AppCompatActivity {
         linearCards.setPadding(0, 15, 0, 0);
         mainJoueurUI = new CarteUI[13];
 
-        surface = new RelativeLayout[4];
+        surface = new ImageView[4];
         cartePlateauUI= new CarteUI[4];
 
         //Main joueur
@@ -64,14 +69,14 @@ public class TapisJeu extends AppCompatActivity {
             linearCards.addView(mainJoueurUI[i]);
         }
 
-        surface[0] = (RelativeLayout) findViewById(R.id.carteJ1);
-        surface[1] = (RelativeLayout) findViewById(R.id.carteJ2);
-        surface[2] = (RelativeLayout) findViewById(R.id.carteJ3);
-        surface[3] = (RelativeLayout) findViewById(R.id.carteJ4);
+        surface[0] = (ImageView) findViewById(R.id.carteJ1);
+        surface[1] = (ImageView) findViewById(R.id.carteJ2);
+        surface[2] = (ImageView) findViewById(R.id.carteJ3);
+        surface[3] = (ImageView) findViewById(R.id.carteJ4);
 
         for(int i = 0; i < 4; ++i) {
             cartePlateauUI[i] = new CarteUI(this);
-            surface[i].addView(cartePlateauUI[i]);
+            surface[i].setBackground(cartePlateauUI[i].getDrawable());
         }
 
         //Cartes jouées
@@ -120,16 +125,17 @@ public class TapisJeu extends AppCompatActivity {
         for(int i = 0 ; i < carteP.length; ++i){
             if(carteP[i] == null)continue;
             cartePlateauUI[i].setParam(carteP[i].getColor().getValue(), carteP[i].getValue());
-            //BitmapDrawable bm = cartePlateauUI[i].confImage();
+            BitmapDrawable bm = cartePlateauUI[i].confImage();
         }
     }
 
     public void afficherCarteJoueur(ArrayList<Carte> mainJoueur) {
-
+        majGraph = false;
         reinitCards();
         miseAJourTapis();
 
         int i = 0;
+
         for (Carte c : mainJoueur) {
             int couleur = c.getColor().getValue();
             int val = c.getValue();
@@ -140,16 +146,24 @@ public class TapisJeu extends AppCompatActivity {
                 return;
             }
             mainJoueurUI[i].setParam(couleur, val);
-            mainJoueurUI[i].confImage();
+           mainJoueurUI[i].confImage();
             System.out.print(i + "affichCarte===============================================\n");
             i++;
+        }
+
+        try {
+            linearCards.invalidate();
+        }catch (Exception e){
+            linearCards.invalidate();
         }
     }
 
     //fonction appelé par interactJoueur via le mThread
     public int[] exchangeCardsPlayer(final ArrayList<Carte> mainJoueur) {
         reinitCards();
+        mainJoueurT = mainJoueur;
         afficherCarteJoueur(mainJoueur);
+        majGraph = true;
         try {
             valdButton.setVisibility(View.VISIBLE);
         }catch (Exception e){
@@ -167,6 +181,8 @@ public class TapisJeu extends AppCompatActivity {
 //        valdButton.setVisibility(View.GONE);
         for(int i=0;i<3;++i)
             System.out.print(it[i]+"\n");
+
+        afficherCarteJoueur(mainJoueur);
         return it;
     }
 
@@ -174,21 +190,47 @@ public class TapisJeu extends AppCompatActivity {
         int it = -1;
 
         reinitCards();
+        //mainJoueurT = mainJoueur;
         afficherCarteJoueur(mainJoueur);
+        //majGraph = true;
+
+       // Carte[] b = ((Carte[])mainJoueur.toArray() );
+        Carte[] cartt =Arrays.copyOf(mainJoueur.toArray(), mainJoueur.toArray().length, Carte[].class);
+        Carte[] cart = plateau.playableCards( cartt/*((Carte[])mainJoueur.toArray() )*/ );
+        setCardPlayable(cart);
+
+
         do {
             it = grantedExchangePlay();
             try {
-                mThread.sleep(1000);//attendre pour eviter trop de ressources pompées
+                mThread.sleep(1000);//attendre pour eviter trop de ressources consommées
             } catch (InterruptedException e) {}
 
         }
         while(-1 == it);
+        afficherCarteJoueur(mainJoueur);
+
+        System.out.println("Carteeee" + it);
         return it;
+    }
+
+    void setCardPlayable(Carte[] cart){
+        boolean notPlayable = true;
+        for(CarteUI c: mainJoueurUI){
+            notPlayable = true;
+            for(Carte d : cart){
+                if(c.isMatches(d)){
+                    notPlayable = false;
+                    break;
+                }
+            }
+            if(notPlayable) c.setActive(false);
+        }
     }
 
     public int grantedExchangePlay(){
         int mem = -1;
-        int i = 0;
+        int i = 0, cmpt = 0;
 
         if(!validGranted ){//bouton valider a été pressé
             return -1;
@@ -197,9 +239,11 @@ public class TapisJeu extends AppCompatActivity {
         for(CarteUI c: mainJoueurUI){
             if(c.isSelected()){
                 if(i >= 1)return -1;//erreur plus de 1 carte selectionné
-                mem = i;
+                mem = cmpt;
                 i++;
+                System.out.println("mem"+mem);
             }
+            cmpt++;
         }
         return mem;
     }

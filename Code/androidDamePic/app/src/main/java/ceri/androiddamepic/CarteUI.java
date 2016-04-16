@@ -7,6 +7,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 import android.widget.ImageButton;
 
+import Game.Carte;
+
 /**
  * Created by cyril on 10/04/16.
  */
@@ -38,6 +40,10 @@ public class CarteUI extends ImageButton {
 
     }
 
+    public boolean isMatches(Carte c){
+        return c.getColor().getValue() == couleur && c.getValue() == valeur;
+    }
+
     public boolean isSelected(){
         if( actif == false)return false;
         return selected;
@@ -55,6 +61,10 @@ public class CarteUI extends ImageButton {
     public void setParam(int coul, int val){
         couleur = coul;
         valeur = val;
+    }
+
+    public void setActive(boolean b){
+        actif = b;
     }
 
     public void erasePic(){

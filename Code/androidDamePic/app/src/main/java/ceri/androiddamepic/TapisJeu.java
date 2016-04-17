@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
@@ -31,7 +30,7 @@ public class TapisJeu extends AppCompatActivity {
     Plateau plateau = null;
     LinearLayout linearCards = null;
     RelativeLayout re = null;
-    ImageView surface[] = null;
+    LinearLayout surface[] = null;
     CarteUI[] mainJoueurUI = null, cartePlateauUI;
     Activity tapisJeuActivity = null;
     Button valdButton = null;
@@ -60,7 +59,7 @@ public class TapisJeu extends AppCompatActivity {
         linearCards.setPadding(0, 15, 0, 0);
         mainJoueurUI = new CarteUI[13];
 
-        surface = new ImageView[4];
+        surface = new LinearLayout[4];
         cartePlateauUI= new CarteUI[4];
 
         //Main joueur
@@ -69,16 +68,17 @@ public class TapisJeu extends AppCompatActivity {
             linearCards.addView(mainJoueurUI[i]);
         }
 
-        surface[0] = (ImageView) findViewById(R.id.carteJ1);
-        surface[1] = (ImageView) findViewById(R.id.carteJ2);
-        surface[2] = (ImageView) findViewById(R.id.carteJ3);
-        surface[3] = (ImageView) findViewById(R.id.carteJ4);
+        surface[0] = (LinearLayout) findViewById(R.id.carteJ1);
+        /*surface[1] = (LinearLayout) findViewById(R.id.carteJ2);
+        surface[2] = (LinearLayout) findViewById(R.id.carteJ3);
+        surface[3] = (LinearLayout) findViewById(R.id.carteJ4);*/
 
         for(int i = 0; i < 4; ++i) {
             cartePlateauUI[i] = new CarteUI(this);
-            surface[i].setBackground(cartePlateauUI[i].getDrawable());
+            surface[0].addView(cartePlateauUI[i]);
         }
-
+        //cartePlateauUI[0] = new CarteUI(this);
+        //surface[0].addView(cartePlateauUI[0]);
         //Cartes jouées
 
         tapisJeuActivity = this;
@@ -125,7 +125,12 @@ public class TapisJeu extends AppCompatActivity {
         for(int i = 0 ; i < carteP.length; ++i){
             if(carteP[i] == null)continue;
             cartePlateauUI[i].setParam(carteP[i].getColor().getValue(), carteP[i].getValue());
+
+            System.out.println(carteP[i].getColor().getValue()+"deus ex"+ carteP[i].getValue());
+
             BitmapDrawable bm = cartePlateauUI[i].confImage();
+               // surface[0].setBackground(cartePlateauUI[i].getDrawable());
+             //surface[0].setBackground(cartePlateauUI[i].getDrawable());
         }
     }
 
@@ -273,9 +278,10 @@ public class TapisJeu extends AppCompatActivity {
         for(int i = 0; i < mainJoueurUI.length ;++i){
             mainJoueurUI[ i ].setSelected( false );
             mainJoueurUI[i ].erasePic();
+            mainJoueurUI[i].setActive(true);
         }
         for(int i = 0; i < cartePlateauUI.length ;++i){
-            mainJoueurUI[ i ].setSelected( false );
+            //mainJoueurUI[ i ].setSelected( false );
             mainJoueurUI[i ].erasePic();
         }
     }

@@ -3,6 +3,8 @@ package ceri.androiddamepic;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 import android.widget.ImageButton;
@@ -17,10 +19,11 @@ public class CarteUI extends ImageButton {
     private int valeur;
     //private int position;
     private boolean actif = false;
-    Bitmap bitmapCarte = null;
+    static Bitmap bitmapCarte = null;
     //public Canvas canvas = null; // tmp
     //Paint paint = null;
     boolean selected = false;
+    CarteUI memCart = this;
 
 
 
@@ -35,10 +38,15 @@ public class CarteUI extends ImageButton {
                 if( actif == false)return;
                 selected = !selected;
                 System.out.print(selected+"select\n");
+                if(selected)
+                    memCart.getBackground().setColorFilter(Color.argb(100, 255, 255, 255), PorterDuff.Mode.DST_IN);
+                else
+                    memCart.getBackground().setColorFilter(Color.argb(255, 255, 255, 255), PorterDuff.Mode.DST_IN);
             }
         });
 
     }
+
 
     public boolean isMatches(Carte c){
         return c.getColor().getValue() == couleur && c.getValue() == valeur;
@@ -109,10 +117,8 @@ public class CarteUI extends ImageButton {
         Bitmap b = bitmapCarte.createBitmap(bitmapCarte, posX, posY, tailleX, tailleY);
 
         Bitmap mutableBitmap = b.copy(Bitmap.Config.ARGB_8888, true);
-        //canvas = new Canvas(mutableBitmap);
-        //paint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
-        //canvas.clipRect(0, 0, 32, 32);
-        //canvas.drawRect(0, 0, 32, 32, paint);
+
+
 
         BitmapDrawable drawable = new BitmapDrawable(getResources(), mutableBitmap);
         try {

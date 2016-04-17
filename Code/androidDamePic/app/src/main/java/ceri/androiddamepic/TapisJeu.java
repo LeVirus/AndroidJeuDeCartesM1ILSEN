@@ -1,7 +1,6 @@
 package ceri.androiddamepic;
 
 import android.app.Activity;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -29,13 +28,14 @@ public class TapisJeu extends AppCompatActivity {
     Partie partie = null;
     Plateau plateau = null;
     LinearLayout linearCards = null;
-    RelativeLayout re = null;
     LinearLayout surface[] = null;
+    RelativeLayout re = null;
     CarteUI[] mainJoueurUI = null, cartePlateauUI;
     Activity tapisJeuActivity = null;
     Button valdButton = null;
     GameThread mThread = new GameThread();
     ArrayList<Carte> mainJoueurT;
+    int memPlace = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,32 @@ public class TapisJeu extends AppCompatActivity {
 
         mThread.start();
 
+    }
+
+    public void refreshScreenEndTurn(){
+
+        miseAJourTapis();
+        try {
+            re.postInvalidate();
+        }catch (Exception e){
+        }
+
+
+        do{
+            try{
+                mThread.sleep(500);
+            }catch (Exception e){
+
+            }
+
+        }while(!validGranted);
+        validGranted = false;
+
+        reinitCards();
+        try {
+            re.postInvalidate();
+        }catch (Exception e){
+        }
     }
 
     void initPlateau() {
@@ -62,6 +88,9 @@ public class TapisJeu extends AppCompatActivity {
         surface = new LinearLayout[4];
         cartePlateauUI= new CarteUI[4];
 
+        re = (RelativeLayout) findViewById(R.id.relativeL);
+
+
         //Main joueur
         for(int i = 0; i < 13; ++i) {
             mainJoueurUI[i] = new CarteUI(this);
@@ -69,13 +98,13 @@ public class TapisJeu extends AppCompatActivity {
         }
 
         surface[0] = (LinearLayout) findViewById(R.id.carteJ1);
-        /*surface[1] = (LinearLayout) findViewById(R.id.carteJ2);
+        surface[1] = (LinearLayout) findViewById(R.id.carteJ2);
         surface[2] = (LinearLayout) findViewById(R.id.carteJ3);
-        surface[3] = (LinearLayout) findViewById(R.id.carteJ4);*/
+        surface[3] = (LinearLayout) findViewById(R.id.carteJ4);
 
         for(int i = 0; i < 4; ++i) {
             cartePlateauUI[i] = new CarteUI(this);
-            surface[0].addView(cartePlateauUI[i]);
+            surface[i].addView(cartePlateauUI[i]);
         }
         //cartePlateauUI[0] = new CarteUI(this);
         //surface[0].addView(cartePlateauUI[0]);
@@ -106,6 +135,9 @@ public class TapisJeu extends AppCompatActivity {
 
         playerss[3] = creerJoueurInteract("joueur1");
         partie = new Partie(playerss);
+        partie.linkActivity(this);
+
+
         plateau = partie.getPlateau();
         structGameStat str = partie.newGame();
         partieLance = false;
@@ -119,16 +151,38 @@ public class TapisJeu extends AppCompatActivity {
     }
 
     public void miseAJourTapis() {
+        boolean finTour = false;
         Carte[] carteP = plateau.getPlayCards();
         //Canvas canvas = new Canvas();
-
+        if(memPlace == -1)memPlace = carteP.length;
+        else finTour = true;
         for(int i = 0 ; i < carteP.length; ++i){
+            int current;
+            if(carteP.length == 1 || carteP.length == 3)
+                current= (i+carteP.length)%4;
+            else if(carteP.length == 4 ) {
+                /*if(finTour) {
+                    if (memPlace == 1 || memPlace == 3)
+                        current = (i + memPlace) % 4;
+                    else if(memPlace == 4){
+                        current = (i + 2) % 4;
+                    }
+                    else current = i;
+
+                    memPlace =-1;
+                }
+                else{*/
+                    current = (i + 2) % 4;
+               // }
+            }
+            else
+                current = i;
             if(carteP[i] == null)continue;
-            cartePlateauUI[i].setParam(carteP[i].getColor().getValue(), carteP[i].getValue());
+            cartePlateauUI[current].setParam(carteP[i].getColor().getValue(), carteP[i].getValue());
 
-            System.out.println(carteP[i].getColor().getValue()+"deus ex"+ carteP[i].getValue());
+            System.out.println(carteP[i].getColor().getValue() + "deus ex" + carteP[i].getValue());
 
-            BitmapDrawable bm = cartePlateauUI[i].confImage();
+            cartePlateauUI[current].confImage();
                // surface[0].setBackground(cartePlateauUI[i].getDrawable());
              //surface[0].setBackground(cartePlateauUI[i].getDrawable());
         }
@@ -144,28 +198,26 @@ public class TapisJeu extends AppCompatActivity {
         for (Carte c : mainJoueur) {
             int couleur = c.getColor().getValue();
             int val = c.getValue();
-            System.out.print(couleur + "coul\n");
-            System.out.print(val + "val\n");
+            //System.out.print(couleur + "coul\n");
+            //System.out.print(val + "val\n");
             if (i >= mainJoueurUI.length || mainJoueurUI[i] == null) {
                 System.out.print(i + "erreur ajout carte\n");
                 return;
             }
             mainJoueurUI[i].setParam(couleur, val);
            mainJoueurUI[i].confImage();
-            System.out.print(i + "affichCarte===============================================\n");
+            //System.out.print(i + "affichCarte===============================================\n");
             i++;
         }
-
         try {
-            linearCards.invalidate();
+            re.postInvalidate();
         }catch (Exception e){
-            linearCards.invalidate();
+            re.postInvalidate();
         }
     }
 
     //fonction appelé par interactJoueur via le mThread
     public int[] exchangeCardsPlayer(final ArrayList<Carte> mainJoueur) {
-        reinitCards();
         mainJoueurT = mainJoueur;
         afficherCarteJoueur(mainJoueur);
         majGraph = true;
@@ -178,7 +230,7 @@ public class TapisJeu extends AppCompatActivity {
         do {
             it = grantedExchange();
             try {
-                mThread.sleep(1000);//attendre pour eviter trop de ressources pompées
+                mThread.sleep(500);//attendre pour eviter trop de ressources pompées
             } catch (InterruptedException e) {}
 
         }
@@ -193,22 +245,17 @@ public class TapisJeu extends AppCompatActivity {
 
     public int playCard(final ArrayList<Carte> mainJoueur){
         int it = -1;
-
-        reinitCards();
-        //mainJoueurT = mainJoueur;
         afficherCarteJoueur(mainJoueur);
-        //majGraph = true;
 
-       // Carte[] b = ((Carte[])mainJoueur.toArray() );
         Carte[] cartt =Arrays.copyOf(mainJoueur.toArray(), mainJoueur.toArray().length, Carte[].class);
-        Carte[] cart = plateau.playableCards( cartt/*((Carte[])mainJoueur.toArray() )*/ );
+        Carte[] cart = plateau.playableCards( cartt );
         setCardPlayable(cart);
 
 
         do {
             it = grantedExchangePlay();
             try {
-                mThread.sleep(1000);//attendre pour eviter trop de ressources consommées
+                mThread.sleep(500);//attendre pour eviter trop de ressources consommées
             } catch (InterruptedException e) {}
 
         }
@@ -281,7 +328,6 @@ public class TapisJeu extends AppCompatActivity {
             mainJoueurUI[i].setActive(true);
         }
         for(int i = 0; i < cartePlateauUI.length ;++i){
-            //mainJoueurUI[ i ].setSelected( false );
             mainJoueurUI[i ].erasePic();
         }
     }

@@ -15,8 +15,11 @@ package Game;
  */
 
 
+import ceri.androiddamepic.TapisJeu;
+
 public class Partie
 {
+	TapisJeu tapisAndroidP = null;
 	//Plataeu de jeu
 	private Plateau plateau;
 	//Nombre de main passé durant une partie
@@ -126,9 +129,15 @@ public class Partie
 		
 		//On ajoute les points du plateau au perdant
 		r.addPoint(plateau.pointOnboard());
-		
+
+		tapisAndroidP.refreshScreenEndTurn();
+
 		plateau.clearTurn();
 		return r;
+	}
+
+	public void linkActivity(TapisJeu tapisAndroid){
+		tapisAndroidP = tapisAndroid;
 	}
 }
 

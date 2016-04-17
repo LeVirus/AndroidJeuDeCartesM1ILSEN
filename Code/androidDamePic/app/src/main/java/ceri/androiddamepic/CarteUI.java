@@ -80,7 +80,6 @@ public class CarteUI extends ImageButton {
         try {
             this.setBackground(null);
         }catch (Exception e){
-            this.setBackground(null);
         }
 
     }
@@ -125,7 +124,6 @@ public class CarteUI extends ImageButton {
             this.setBackground(drawable);
         }
         catch (Exception e){
-            this.setBackground(drawable);
         }
 
         return drawable;

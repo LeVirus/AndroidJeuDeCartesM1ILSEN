@@ -88,11 +88,7 @@ public class TapisJeu extends AppCompatActivity {
         memPlace = -1;
         initValidateButton();
         linearCards = (LinearLayout) findViewById(R.id.linear);
-        //grid = (GridLayout) findViewById(R.id.gridPlat);
 
-        //grid.addView(new CarteUI(this), new GridLayout.LayoutParams(1, 1));
-
-       // re = (RelativeLayout) findViewById(R.id.relativeL);
         linearCards.setPadding(0, 15, 0, 0);
         mainJoueurUI = new CarteUI[13];
 
@@ -117,8 +113,6 @@ public class TapisJeu extends AppCompatActivity {
             cartePlateauUI[i] = new CarteUI(this);
             surface[i].addView(cartePlateauUI[i]);
         }
-        //cartePlateauUI[0] = new CarteUI(this);
-        //surface[0].addView(cartePlateauUI[0]);
         //Cartes jouées
 
         tapisJeuActivity = this;

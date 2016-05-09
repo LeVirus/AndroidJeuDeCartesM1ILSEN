@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.parametre:        // Régler les paramètres
-                startActivity(new Intent(MainActivity.this, TapisJeu.class));
+                startActivity(new Intent(MainActivity.this, ParamMenuActivity.class));
                 //setContentView(R.layout.main_menu);
                 break;
 

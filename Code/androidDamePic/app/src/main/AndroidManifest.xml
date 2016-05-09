@@ -15,7 +15,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TapisJeu"></activity>
+        <activity android:name=".TapisJeu" />
+        <activity android:name=".ParamMenuActivity"></activity>
     </application>
 
 </manifest>

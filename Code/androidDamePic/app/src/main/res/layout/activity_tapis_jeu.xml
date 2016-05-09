@@ -16,19 +16,15 @@
     tools:context="ceri.androiddamepic.TapisJeu">
 
 
-
-
-
-
-
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:id="@+id/carteJ1"
         android:layout_centerHorizontal="true"
-        ></LinearLayout>
+        >
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -44,7 +40,9 @@
         android:layout_height="60dp"
         android:id="@+id/carteJ3"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"></LinearLayout>
+        android:layout_centerHorizontal="true">
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -72,4 +70,5 @@
         android:id="@+id/buttonVal"
         android:layout_above="@+id/linear"
         android:layout_alignEnd="@+id/linear" />
+
 </RelativeLayout>

@@ -48,6 +48,11 @@ public class TapisJeu extends AppCompatActivity {
 
     }
 
+    /**
+     * Fonction appelé en fin de tours(les 4 joueurs ont joués).
+     * Attend que le joueur est préssé valider.
+     * A MODIFIER AJOUTER  RETOUR UTILISAZTEUR SIGNALANT LA FON DU TOUR.
+     */
     public void refreshScreenEndTurn(){
 
         miseAJourTapis();
@@ -74,6 +79,11 @@ public class TapisJeu extends AppCompatActivity {
         }
     }
 
+    /**
+     * Initialisation du contexte graphique.
+     * Récupération des éléments graphique provenant du fichier XML et
+     * initalisation des classes.
+     */
     void initPlateau() {
         initValidateButton();
         linearCards = (LinearLayout) findViewById(R.id.linear);
@@ -113,6 +123,9 @@ public class TapisJeu extends AppCompatActivity {
         tapisJeuActivity = this;
     }
 
+    /**
+     * Récupération du bouton valider en provenance du fichier XML.
+     */
     void initValidateButton(){
         valdButton = (Button) findViewById(R.id.buttonVal);
         valdButton.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +137,10 @@ public class TapisJeu extends AppCompatActivity {
 
     }
 
+    /**
+     * Création du contexte de jeu.
+     * Initialisations des classes contenues dans Game et dans Player.
+     */
     void lancerPartie() {
         if (partieLance == true) return;
 
@@ -132,11 +149,9 @@ public class TapisJeu extends AppCompatActivity {
         for (int i = 0; i < playerss.length; i++) {
             playerss[i] = new IAPlayer("J" + i);
         }
-
         playerss[3] = creerJoueurInteract("joueur1");
         partie = new Partie(playerss);
         partie.linkActivity(this);
-
 
         plateau = partie.getPlateau();
         structGameStat str = partie.newGame();
@@ -144,18 +159,33 @@ public class TapisJeu extends AppCompatActivity {
     }
 
 
+    /**
+     * Initialisation du joueur d'interaction avec l'UI.
+     */
     IPlayer creerJoueurInteract(String idd) {
         InteractePlayer player = new InteractePlayer();
         player.linkActivity(this);
         return player;
     }
 
+    /**
+     *Fonction d'affichage des cartes jouées sur le plateau par les autres joueurs.
+     */
     public void miseAJourTapis() {
         boolean finTour = false;
+        //récup des cartes jouées du plateau
         Carte[] carteP = plateau.getPlayCards();
         //Canvas canvas = new Canvas();
+
         if(memPlace == -1)memPlace = carteP.length;
-        else finTour = true;
+        else {
+            finTour = true;
+        }
+
+        System.out.println("taille dd"+carteP.length);
+
+        //affichage des cartes, leurs position est déterminé en fonction
+        //de la taille du tableau retourné
         for(int i = 0 ; i < carteP.length; ++i){
             int current;
             if(carteP.length == 1 || carteP.length == 3)
@@ -177,17 +207,25 @@ public class TapisJeu extends AppCompatActivity {
             }
             else
                 current = i;
-            if(carteP[i] == null)continue;
+//            if(carteP[i] == null)continue;
+
+            //mise a jour de l'apparence de la carte
             cartePlateauUI[current].setParam(carteP[i].getColor().getValue(), carteP[i].getValue());
 
-            System.out.println(carteP[i].getColor().getValue() + "deus ex" + carteP[i].getValue());
+            System.out.println(carteP[i].getColor().getValue() + "deus ex" + memPlace+carteP[i].getValue());
 
+            //application de la mise a jour
             cartePlateauUI[current].confImage();
                // surface[0].setBackground(cartePlateauUI[i].getDrawable());
              //surface[0].setBackground(cartePlateauUI[i].getDrawable());
         }
+        if(finTour)memPlace = -1;
     }
 
+    /**
+     * Affichage graphique de la main du joueur.
+     * Configuration des paramètres des CarteUIs et affichages dans le layout de la main du joueur.
+     */
     public void afficherCarteJoueur(ArrayList<Carte> mainJoueur) {
         majGraph = false;
         reinitCards();
@@ -196,6 +234,7 @@ public class TapisJeu extends AppCompatActivity {
         int i = 0;
 
         for (Carte c : mainJoueur) {
+            //récup des valeur dans Game
             int couleur = c.getColor().getValue();
             int val = c.getValue();
             //System.out.print(couleur + "coul\n");
@@ -204,6 +243,7 @@ public class TapisJeu extends AppCompatActivity {
                 System.out.print(i + "erreur ajout carte\n");
                 return;
             }
+            //application de ces valeurs coté UI
             mainJoueurUI[i].setParam(couleur, val);
            mainJoueurUI[i].confImage();
             //System.out.print(i + "affichCarte===============================================\n");
@@ -212,22 +252,24 @@ public class TapisJeu extends AppCompatActivity {
         try {
             re.postInvalidate();
         }catch (Exception e){
-            re.postInvalidate();
         }
     }
 
     //fonction appelé par interactJoueur via le mThread
+    /**
+     *  Application de l'échange des cartes coté graphique
+     */
     public int[] exchangeCardsPlayer(final ArrayList<Carte> mainJoueur) {
         mainJoueurT = mainJoueur;
+        //maj cartes joueur
         afficherCarteJoueur(mainJoueur);
         majGraph = true;
         try {
             valdButton.setVisibility(View.VISIBLE);
         }catch (Exception e){
-            valdButton.setVisibility(View.VISIBLE);
         }
         int it[] = null;
-        do {
+        do {//tant que les cartes n'ont pas été selectionnées et validées
             it = grantedExchange();
             try {
                 mThread.sleep(500);//attendre pour eviter trop de ressources pompées
@@ -243,16 +285,21 @@ public class TapisJeu extends AppCompatActivity {
         return it;
     }
 
+    /**
+     *
+     * application jouer carte point de vue graphique
+     */
     public int playCard(final ArrayList<Carte> mainJoueur){
         int it = -1;
         afficherCarteJoueur(mainJoueur);
+
 
         Carte[] cartt =Arrays.copyOf(mainJoueur.toArray(), mainJoueur.toArray().length, Carte[].class);
         Carte[] cart = plateau.playableCards( cartt );
         setCardPlayable(cart);
 
 
-        do {
+        do {//tant que la carte n'a pas été jouée
             it = grantedExchangePlay();
             try {
                 mThread.sleep(500);//attendre pour eviter trop de ressources consommées
@@ -266,10 +313,15 @@ public class TapisJeu extends AppCompatActivity {
         return it;
     }
 
+    /**
+     *   Détermine a partir du package Game quelle carte sont jouable et fais les modifications en
+     *   conséquences dans la main du joueur
+     */
     void setCardPlayable(Carte[] cart){
         boolean notPlayable = true;
         for(CarteUI c: mainJoueurUI){
             notPlayable = true;
+            //parcour de la liste de carte provenant de game
             for(Carte d : cart){
                 if(c.isMatches(d)){
                     notPlayable = false;
@@ -280,14 +332,19 @@ public class TapisJeu extends AppCompatActivity {
         }
     }
 
+    /**
+     * Fonction de validation de la phase JOUER.
+     * Vérifie si la carte a bien été selectionné après que le bouton valider est été pressé.
+     */
     public int grantedExchangePlay(){
         int mem = -1;
         int i = 0, cmpt = 0;
 
-        if(!validGranted ){//bouton valider a été pressé
+        if(!validGranted ){//bouton valider n'a pas été pressé
             return -1;
         }
         validGranted = false;
+        //parcour des cartes du joueur
         for(CarteUI c: mainJoueurUI){
             if(c.isSelected()){
                 if(i >= 1)return -1;//erreur plus de 1 carte selectionné
@@ -300,7 +357,12 @@ public class TapisJeu extends AppCompatActivity {
         return mem;
     }
 
+    /**
+     * Fonction de validation de la phaase jouer.
+     *      * Vérifie si les cartes ont bien été selectionnées après que le bouton valider est été pressé.
 
+     * A CORRIGER POUR LES TOURS AVEC 2 ET UNE CARTE A ECHANGER
+     */
     public int[] grantedExchange(){
         int mem[] = new int[3];
         int cmpt = 0, i = 0;
@@ -309,6 +371,7 @@ public class TapisJeu extends AppCompatActivity {
             return null;
         }
         validGranted = false;
+        //parcour des cartes du joueur
         for(CarteUI c: mainJoueurUI){
             if(c.isSelected()){
                 if(i >= 3)break;//erreur plus de 3 cartes selectionné
@@ -321,6 +384,10 @@ public class TapisJeu extends AppCompatActivity {
         return null;
     }
 
+    /**
+     * Réinitialisation de la main du joueur.
+     * Déselection des cartes et effacements des cartes précédemment affichées
+     */
     void reinitCards(){
         for(int i = 0; i < mainJoueurUI.length ;++i){
             mainJoueurUI[ i ].setSelected( false );
@@ -333,7 +400,9 @@ public class TapisJeu extends AppCompatActivity {
     }
 
 
-
+    /**
+     * Lancement du thread Jeu
+     */
     private class GameThread extends Thread {
         @Override
         public void run() {

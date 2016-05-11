@@ -26,7 +26,6 @@ public class InteractePlayer extends abstractPlayer implements IPlayer
 //		int i = in.nextInt();
 		//in.close();
 		int c = tapisAndroidP.playCard(carteEnMain);
-		System.out.println("Carteeee"+c);
 		Carte r = carteEnMain.get(c);
 		carteEnMain.remove(c);
 		return r;
@@ -36,31 +35,15 @@ public class InteractePlayer extends abstractPlayer implements IPlayer
 	public Carte[] exchangeCards()
 	{
 		Carte[] r = new Carte[3];
-
-
-		//int t[] = new int[3];
 		int t[] = tapisAndroidP.exchangeCardsPlayer(carteEnMain);
-		//System.out.println("Chosiir les 3 cartes  changer.");
-		//System.out.println("Cartes en main:");
-		//Scanner in = new Scanner(System.in);
-
 		for(int i=0;i<3;i++)
 		{
-
 			r[i]=carteEnMain.get(t[i]);
 		}
-
-		System.out.print("carte::"+carteEnMain.size());
 		for(int i=2;i>=0;i--)
 		{
-
 			carteEnMain.remove(t[i]);
 		}
-
-
-
-		//in.close();
-		System.out.print("carte::"+carteEnMain.size());
 		return r;
 	}
 

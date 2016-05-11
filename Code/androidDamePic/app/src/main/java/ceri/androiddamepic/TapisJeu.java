@@ -18,6 +18,7 @@ import Game.Plateau;
 import Game.structGameStat;
 import Player.IAPlayer;
 import Player.InteractePlayer;
+import Player.UIPlayer;
 
 public class TapisJeu extends AppCompatActivity {
 
@@ -158,8 +159,9 @@ public class TapisJeu extends AppCompatActivity {
      * Initialisation du joueur d'interaction avec l'UI.
      */
     IPlayer creerJoueurInteract(String idd) {
-        InteractePlayer player = new InteractePlayer();
-        player.linkActivity(this);
+        //InteractePlayer player = new InteractePlayer();
+        UIPlayer player = new UIPlayer(this);
+        //player.linkActivity(this);
         return player;
     }
 

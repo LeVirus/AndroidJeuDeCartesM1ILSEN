@@ -1,6 +1,8 @@
 package ceri.androiddamepic;
 
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -324,10 +326,21 @@ public class TapisJeu extends AppCompatActivity {
             for(Carte d : cart){
                 if(c.isMatches(d)){
                     notPlayable = false;
+
+
                     break;
                 }
             }
-            if(notPlayable) c.setActive(false);
+
+            if(notPlayable) {
+                try {
+                    int iconColor = Color.GRAY;
+                    c.getBackground().setColorFilter(iconColor, PorterDuff.Mode.MULTIPLY );
+                }catch(Exception e){
+
+                }
+                c.setActive(false);
+            }
         }
     }
 
@@ -358,7 +371,6 @@ public class TapisJeu extends AppCompatActivity {
     /**
      * Fonction de validation de la phaase jouer.
      * Vérifie si les cartes ont bien été selectionnées après que le bouton valider est été pressé.
-     * A CORRIGER POUR LES TOURS AVEC 2 ET UNE CARTE A ECHANGER
      */
     public int[] grantedExchange(){
         int mem[] = new int[3];

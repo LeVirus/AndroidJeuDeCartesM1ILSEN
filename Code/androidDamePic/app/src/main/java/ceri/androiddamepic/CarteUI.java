@@ -46,11 +46,15 @@ public class CarteUI extends ImageButton {
             public void onClick(View v) {
                 if( actif == false)return;
                 selected = !selected;
-                System.out.print(selected+"select\n");
-                if(selected)
-                    memCart.getBackground().setColorFilter(Color.argb(100, 255, 255, 255), PorterDuff.Mode.DST_IN);
-                else
+                if(selected) {//modifier la transparence
+                    memCart.getBackground().setColorFilter(Color.argb(100, 0, 0, 0), PorterDuff.Mode.DST_IN);
+
+                }
+                else {
                     memCart.getBackground().setColorFilter(Color.argb(255, 255, 255, 255), PorterDuff.Mode.DST_IN);
+                    //int iconColor = android.graphics.Color.RED;
+                    //memCart.getBackground().setColorFilter(iconColor, PorterDuff.Mode.MULTIPLY );
+                }
             }
         });
 

@@ -126,8 +126,8 @@ public class CarteUI extends ImageButton {
      * Le bitmap représentant l'image est renvoyé.
      */
     //"coeur", 0,"trefle", 1, "carreau", 2, "pique", 3
-    BitmapDrawable confImage(){
-        actif = true;
+    void confImage(){
+        /*actif = true;
         //init des variables de texture
         int posY=2, posX=1, tailleX =85, tailleY = 128, distX = 91, distY = 134;
         //détermination de la position et de la taille du sprite a partir de la texture
@@ -162,12 +162,206 @@ public class CarteUI extends ImageButton {
 
         BitmapDrawable drawable = new BitmapDrawable(getResources(), mutableBitmap);
         try {
+
+            //this.setBackground(drawable);
+        }
+        catch (Exception e){
+        }*/
+        int mem = 0;
+
+
+        if(couleur == 0){//coeur
+            switch(valeur){
+                case 2:
+                    mem = R.drawable.deuxc;
+                    break;
+                case 3:
+                    mem = R.drawable.troisc;
+                    break;
+                case 4:
+                    mem = R.drawable.quatrec;
+                    break;
+                case 5:
+                    mem = R.drawable.cinqc;
+                    break;
+                case 6:
+                    mem = R.drawable.sixc;
+                    break;
+                case 7:
+                    mem = R.drawable.septc;
+                    break;
+                case 8:
+                    mem = R.drawable.huitc;
+                    break;
+                case 9:
+                    mem = R.drawable.neufc;
+                    break;
+                case 10:
+                    mem = R.drawable.dixc;
+                    break;
+                case 11:
+                    mem = R.drawable.valetc;
+                    break;
+                case 12:
+                    mem = R.drawable.reinec;
+                    break;
+                case 13:
+                    mem = R.drawable.roic;
+                    break;
+                case 14:
+                    mem = R.drawable.asc;
+                    break;
+
+            }
+        }
+        else if(couleur == 1){//trefle
+            switch(valeur){
+                case 2:
+                    mem = R.drawable.deuxt;
+                    break;
+                case 3:
+                    mem = R.drawable.troist;
+                    break;
+                case 4:
+                    mem = R.drawable.quatret;
+                    break;
+                case 5:
+                    mem = R.drawable.cinqt;
+                    break;
+                case 6:
+                    mem = R.drawable.sixt;
+                    break;
+                case 7:
+                    mem = R.drawable.septt;
+                    break;
+                case 8:
+                    mem = R.drawable.huitt;
+                    break;
+                case 9:
+                    mem = R.drawable.neuft;
+                    break;
+                case 10:
+                    mem = R.drawable.dixt;
+                    break;
+                case 11:
+                    mem = R.drawable.valett;
+                    break;
+                case 12:
+                    mem = R.drawable.reinet;
+                    break;
+                case 13:
+                    mem = R.drawable.roit;
+                    break;
+                case 14:
+                    mem = R.drawable.ast;
+                    break;
+
+            }
+        }
+        else if(couleur == 2){//carreau
+            switch(valeur){
+                case 2:
+                    mem = R.drawable.deuxcar;
+                    break;
+                case 3:
+                    mem = R.drawable.troiscar;
+                    break;
+                case 4:
+                    mem = R.drawable.quatrecar;
+                    break;
+                case 5:
+                    mem = R.drawable.cinqcar;
+                    break;
+                case 6:
+                    mem = R.drawable.sixcar;
+                    break;
+                case 7:
+                    mem = R.drawable.septcar;
+                    break;
+                case 8:
+                    mem = R.drawable.huitcar;
+                    break;
+                case 9:
+                    mem = R.drawable.neufcar;
+                    break;
+                case 10:
+                    mem = R.drawable.dixcar;
+                    break;
+                case 11:
+                    mem = R.drawable.valetcar;
+                    break;
+                case 12:
+                    mem = R.drawable.reinecar;
+                    break;
+                case 13:
+                    mem = R.drawable.roicar;
+                    break;
+                case 14:
+                    mem = R.drawable.ascar;
+                    break;
+
+            }
+        }
+        else if(couleur == 3){//pique
+            switch(valeur){
+                case 2:
+                    mem = R.drawable.deuxp;
+                    break;
+                case 3:
+                    mem = R.drawable.troisp;
+                    break;
+                case 4:
+                    mem = R.drawable.quatrep;
+                    break;
+                case 5:
+                    mem = R.drawable.cinqp;
+                    break;
+                case 6:
+                    mem = R.drawable.sixp;
+                    break;
+                case 7:
+                    mem = R.drawable.septp;
+                    break;
+                case 8:
+                    mem = R.drawable.huitp;
+                    break;
+                case 9:
+                    mem = R.drawable.neufp;
+                    break;
+                case 10:
+                    mem = R.drawable.dixp;
+                    break;
+                case 11:
+                    mem = R.drawable.valetp;
+                    break;
+                case 12:
+                    mem = R.drawable.rainep;
+                    break;
+                case 13:
+                    mem = R.drawable.roip;
+                    break;
+                case 14:
+                    mem = R.drawable.asp;
+                    break;
+
+            }
+        }
+
+
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), mem);
+
+        Bitmap mutableBitmap = bm.copy(Bitmap.Config.ARGB_8888, true);
+
+        BitmapDrawable drawable = new BitmapDrawable(getResources(), mutableBitmap);
+        try {
+
             this.setBackground(drawable);
         }
         catch (Exception e){
         }
 
-        return drawable;
+       // return drawable;
+        //return this.getDrawable();
 
 
     }

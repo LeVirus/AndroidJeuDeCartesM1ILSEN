@@ -20,17 +20,16 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:id="@+id/carteJ1"
         android:layout_centerHorizontal="true"
         >
-
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:id="@+id/carteJ2"
         android:layout_below="@+id/carteJ1"
         android:layout_toEndOf="@+id/carteJ3"></LinearLayout>
@@ -38,7 +37,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:id="@+id/carteJ3"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
@@ -48,7 +47,7 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:id="@+id/carteJ4"
         android:layout_below="@+id/carteJ1"
         android:layout_toStartOf="@+id/carteJ1"></LinearLayout>

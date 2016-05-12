@@ -115,7 +115,10 @@ public class TapisJeu extends AppCompatActivity {
 
         for(int i = 0; i < 4; ++i) {
             cartePlateauUI[i] = new CarteUI(this);
+
+
             surface[i].addView(cartePlateauUI[i]);
+
         }
         //Cartes jouées
 

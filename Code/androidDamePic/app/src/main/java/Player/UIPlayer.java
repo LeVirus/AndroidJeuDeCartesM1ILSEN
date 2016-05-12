@@ -1,14 +1,13 @@
 package Player;
 
 import android.content.Context;
-import android.widget.Toast;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import Game.Carte;
-import Game.IPlateau;
 import Game.IPlayer;
 import ceri.androiddamepic.TapisJeu;
 //import mad.damedepique.GameActivity;
@@ -24,6 +23,7 @@ public class UIPlayer extends abstractPlayer implements IPlayer
 
     public UIPlayer(TapisJeu gameActivity)
     {
+        carteEnMain = new ArrayList<Carte>();
         points = 0;
         this.gameActivity = gameActivity;
         this.lock = new ReentrantLock();
@@ -35,7 +35,10 @@ public class UIPlayer extends abstractPlayer implements IPlayer
     {
         //On rafraichie le plateau de jeu
         //gameActivity.refreshScreen();
-        Toast.makeText(context, "A votre tour.", Toast.LENGTH_LONG).show();
+        try {
+            gameActivity.writeToast("A votre tour");
+            //Toast.makeText(context, "A votre tour.", Toast.LENGTH_LONG).show();
+        }catch (Exception e){System.out.println( e.toString() );}
         lock.lock();
         int c = gameActivity.playCard(carteEnMain);
         Carte r = carteEnMain.get(c);
@@ -51,7 +54,12 @@ public class UIPlayer extends abstractPlayer implements IPlayer
     @Override
     public Carte[] exchangeCards()
     {
-        Toast.makeText(context, "Choisisez 3 cartes à échanger.", Toast.LENGTH_LONG).show();
+
+        Log.d("TapisJeu", "C: Connecting...");
+
+        try {
+            gameActivity.writeToast("Choisisez 3 cartes à échanger");
+        }catch (Exception e){System.out.println( e.toString() );}
         Lock lock = new ReentrantLock();
         lock.lock();
 

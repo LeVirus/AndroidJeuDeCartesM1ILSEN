@@ -3,10 +3,12 @@ package ceri.androiddamepic;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +19,6 @@ import Game.Partie;
 import Game.Plateau;
 import Game.structGameStat;
 import Player.IAPlayer;
-import Player.InteractePlayer;
 import Player.UIPlayer;
 
 public class TapisJeu extends AppCompatActivity {
@@ -52,17 +53,17 @@ public class TapisJeu extends AppCompatActivity {
     /**
      * Fonction appelé en fin de tours(les 4 joueurs ont joués).
      * Attend que le joueur est préssé valider.
-     * A MODIFIER AJOUTER  RETOUR UTILISAZTEUR SIGNALANT LA FON DU TOUR.
      */
     public void refreshScreenEndTurn(){
 
         miseAJourTapis(true);
         try {
+            //maj graphique
             re.postInvalidate();
         }catch (Exception e){
         }
 
-
+        writeToast("Appuyer sur valider pour continuer");
         do{
             try{
                 mThread.sleep(500);
@@ -142,7 +143,7 @@ public class TapisJeu extends AppCompatActivity {
 
         partieLance = true;
         playerss = new IPlayer[4];
-        for (int i = 0; i < playerss.length; i++) {
+        for (int i = 0; i < playerss.length - 1; i++) {
             playerss[i] = new IAPlayer("J" + i);
         }
         playerss[3] = creerJoueurInteract("joueur1");
@@ -393,6 +394,8 @@ public class TapisJeu extends AppCompatActivity {
 
     }
 
+
+
     /**
      * Réinitialisation des cartes du plateau.
      * Effacements des images associées aux cartes précédemment affichées.
@@ -404,15 +407,33 @@ public class TapisJeu extends AppCompatActivity {
         }
     }
 
-
+    public void writeToast(final String s){
+        mThread.writeToast(s);
+    }
     /**
      * Lancement du thread Jeu
      */
-    private class GameThread extends Thread {
+    private class GameThread extends Thread implements Runnable{
         @Override
         public void run() {
+
+
+
             lancerPartie();
+
         }
+
+        public void writeToast(final String s){
+            Log.d("TapisJeu", "C: Connecting...");
+            runOnUiThread(new Runnable() {
+                public void run() {
+
+                    Toast.makeText(TapisJeu.this, s, Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
+
     }
 
 }

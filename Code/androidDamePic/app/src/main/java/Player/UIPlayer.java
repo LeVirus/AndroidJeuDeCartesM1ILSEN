@@ -40,6 +40,7 @@ public class UIPlayer extends abstractPlayer implements IPlayer
             //Toast.makeText(context, "A votre tour.", Toast.LENGTH_LONG).show();
         }catch (Exception e){System.out.println( e.toString() );}
         lock.lock();
+        carteEnMain = sortHand(carteEnMain);
         int c = gameActivity.playCard(carteEnMain);
         Carte r = carteEnMain.get(c);
         carteEnMain.remove(c);

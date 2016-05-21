@@ -28,6 +28,7 @@ public class TapisJeu extends AppCompatActivity {
     boolean partieLance = false;
     boolean validGranted = false;
     boolean majGraph = false;
+    boolean phaseJeu = false;
     IPlayer playerss[] = null;
     Partie partie = null;
     Plateau plateau = null;
@@ -59,6 +60,9 @@ public class TapisJeu extends AppCompatActivity {
     public void refreshScreenEndTurn(){
 
         miseAJourTapis(true);
+        try {
+            valdButton.setText("tour suivant");
+        }catch(Exception e){}
         try {
             //maj graphique
             re.postInvalidate();
@@ -105,6 +109,7 @@ public class TapisJeu extends AppCompatActivity {
         //Main joueur
         for(int i = 0; i < 13; ++i) {
             mainJoueurUI[i] = new CarteUI(this);
+            mainJoueurUI[i].linkTapisJeu(this);
             linearCards.addView(mainJoueurUI[i]);
         }
 
@@ -264,15 +269,22 @@ public class TapisJeu extends AppCompatActivity {
      *  Application de l'échange des cartes coté graphique
      */
     public int[] exchangeCardsPlayer(final ArrayList<Carte> mainJoueur) {
+        try {
+            valdButton.setText("valider");
+        }catch(Exception e){}
+
         mainJoueurT = mainJoueur;
+
         //maj cartes joueur
         afficherCarteJoueur(mainJoueur);
         miseAJourTapis(false);
         majGraph = true;
-        try {
-            valdButton.setVisibility(View.VISIBLE);
-        }catch (Exception e){
+
+        for(int i = 0; i < mainJoueurUI.length ;++i){
+
+            mainJoueurUI[i].setActive(true);
         }
+
         int it[] = null;
         do {//tant que les cartes n'ont pas été selectionnées et validées
             it = grantedExchange();
@@ -294,7 +306,11 @@ public class TapisJeu extends AppCompatActivity {
      * application jouer carte point de vue graphique.
      */
     public int playCard(final ArrayList<Carte> mainJoueur){
+        try{
+            valdButton.setText("valider");
+        }catch (Exception e){}
         int it = -1;
+        phaseJeu =true;
         afficherCarteJoueur(mainJoueur);
         miseAJourTapis(true);
 
@@ -313,8 +329,15 @@ public class TapisJeu extends AppCompatActivity {
         }
         while(-1 == it);
         afficherCarteJoueur(mainJoueur);
-
+        phaseJeu =false;
         return it;
+    }
+
+    void deselectCartesJeu(){
+        if(!phaseJeu)return;
+        for(CarteUI c: mainJoueurUI){
+            c.unselectJeu();
+        }
     }
 
     /**
@@ -329,7 +352,7 @@ public class TapisJeu extends AppCompatActivity {
             for(Carte d : cart){
                 if(c.isMatches(d)){
                     notPlayable = false;
-
+                    c.setActive(true);
 
                     break;
                 }
@@ -404,7 +427,7 @@ public class TapisJeu extends AppCompatActivity {
         for(int i = 0; i < mainJoueurUI.length ;++i){
             mainJoueurUI[ i ].setSelected( false );
             mainJoueurUI[i ].erasePic();
-            mainJoueurUI[i].setActive(true);
+            mainJoueurUI[i].setActive(false);
         }
 
     }

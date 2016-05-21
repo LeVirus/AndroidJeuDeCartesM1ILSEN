@@ -25,6 +25,7 @@ public class CarteUI extends ImageButton {
     //Paint paint = null;
     boolean selected = false;
     CarteUI memCart = this;
+    TapisJeu tapisJeu = null;
 
 
     /**
@@ -44,20 +45,28 @@ public class CarteUI extends ImageButton {
              */
             @Override
             public void onClick(View v) {
-                if( actif == false)return;
-                selected = !selected;
-                if(selected) {//modifier la transparence
-                    memCart.getBackground().setColorFilter(Color.argb(100, 0, 0, 0), PorterDuff.Mode.DST_IN);
+                try {
+                    if (actif == false) return;
+                    selected = !selected;
+                    if (selected) {//modifier la transparence
+                        tapisJeu.deselectCartesJeu();
+                        selected = true;
+                        memCart.getBackground().setColorFilter(Color.argb(100, 0, 0, 0), PorterDuff.Mode.DST_IN);
 
-                }
-                else {
-                    memCart.getBackground().setColorFilter(Color.argb(255, 255, 255, 255), PorterDuff.Mode.DST_IN);
-                    //int iconColor = android.graphics.Color.RED;
-                    //memCart.getBackground().setColorFilter(iconColor, PorterDuff.Mode.MULTIPLY );
-                }
+                    } else {
+                        memCart.getBackground().setColorFilter(Color.argb(255, 255, 255, 255), PorterDuff.Mode.DST_IN);
+
+                        //int iconColor = android.graphics.Color.RED;
+                        //memCart.getBackground().setColorFilter(iconColor, PorterDuff.Mode.MULTIPLY );
+                    }
+                }catch (Exception e){}
             }
         });
 
+    }
+
+    public void linkTapisJeu(TapisJeu tj){
+        tapisJeu = tj;
     }
 
     /**
@@ -93,6 +102,14 @@ public class CarteUI extends ImageButton {
         selected = b;
     }
 
+
+    public void unselectJeu(){
+        if( actif == false)return;
+        selected = false;
+        try {
+            this.getBackground().setColorFilter(Color.argb(255, 255, 255, 255), PorterDuff.Mode.DST_IN);
+        }catch (Exception e){}
+    }
 
     /**
      * Modifications des paramètres valeurs de la cartes.

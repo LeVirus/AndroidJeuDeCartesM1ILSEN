@@ -64,9 +64,10 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:text="Valider"
         android:id="@+id/buttonVal"
+
         android:layout_above="@+id/linear"
         android:layout_alignEnd="@+id/linear" />
 

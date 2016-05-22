@@ -391,6 +391,7 @@ public class TapisJeu extends AppCompatActivity {
             }
             cmpt++;
         }
+        if(mem == -1)writeToast("Veuillez selectionner une carte.");
         return mem;
     }
 
@@ -416,6 +417,7 @@ public class TapisJeu extends AppCompatActivity {
             cmpt++;
         }
         if(cmpt == 13 && i == 3)return mem;
+        writeToast("Veuillez selectionner 3 cartes.");
         return null;
     }
 

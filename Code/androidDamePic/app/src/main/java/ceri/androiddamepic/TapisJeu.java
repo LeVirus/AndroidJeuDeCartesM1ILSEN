@@ -69,7 +69,7 @@ public class TapisJeu extends AppCompatActivity {
         }catch (Exception e) {
         }
 
-        showHandGained();
+        //showHandGained();
 
         mThread.writeLabel();
 

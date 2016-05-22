@@ -16,7 +16,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".TapisJeu" />
-        <activity android:name=".ParamMenuActivity"></activity>
+        <activity android:name=".ParamMenuActivity" />
+        <activity
+            android:name=".RecapActivity"
+            android:label="@string/title_activity_recap"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

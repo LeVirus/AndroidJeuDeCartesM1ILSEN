@@ -1,6 +1,7 @@
 package ceri.androiddamepic;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -68,18 +69,7 @@ public class TapisJeu extends AppCompatActivity {
         }catch (Exception e) {
         }
 
-        IPlayer player = plateau.whoIsbig();
-        for( int i = 0 ; i < playerss.length ; ++i ){
-            if(player == playerss[i]){
-                try {
-                    int iconColor = Color.RED;
-                    cartePlateauUI[i].getBackground().setColorFilter(iconColor, PorterDuff.Mode.MULTIPLY );
-                }catch(Exception e){
-
-                }
-                //break;
-            }
-        }
+        showHandGained();
 
         mThread.writeLabel();
 
@@ -104,6 +94,24 @@ public class TapisJeu extends AppCompatActivity {
         try {
             re.postInvalidate();
         }catch (Exception e){
+        }
+    }
+
+    /**
+     * Montre le joueur ayant remporté le pli.
+     */
+    void showHandGained(){
+        IPlayer player = plateau.whoIsbig();
+        for( int i = 0 ; i < playerss.length ; ++i ){
+            if(player == playerss[i]){
+                try {
+                    int iconColor = Color.RED;
+                    cartePlateauUI[i].getBackground().setColorFilter(iconColor, PorterDuff.Mode.MULTIPLY );
+                }catch(Exception e){
+
+                }
+                break;
+            }
         }
     }
 
@@ -185,7 +193,27 @@ public class TapisJeu extends AppCompatActivity {
 
         plateau = partie.getPlateau();
         structGameStat str = partie.newGame();
+
+
+
         partieLance = false;
+    }
+
+   public void afficherRecap(){
+        int[] i = new int[4];
+        i[0] = playerss[0].getPoint();
+        i[1] = playerss[1].getPoint();
+        i[2] = playerss[2].getPoint();
+        i[3] = playerss[3].getPoint();
+
+        String[] s = new String[4];
+        s[0] = "Ouest";
+        s[1] = "Nord";
+        s[2] = "Est";
+        s[3] = "Vous";
+        DataResult.setResultes(s, i);
+
+        startActivity(new Intent(TapisJeu.this, RecapActivity.class));
     }
 
 

@@ -94,6 +94,8 @@ public class Partie
 			 if(debug)System.out.println("\nNouvelle manche: "+(i+1));
 			 p = newTurn(p);
 		 }
+
+		tapisAndroidP.afficherRecap();
 		 
 		 //Vérification de la cloche de bois
 		 /*i=0;

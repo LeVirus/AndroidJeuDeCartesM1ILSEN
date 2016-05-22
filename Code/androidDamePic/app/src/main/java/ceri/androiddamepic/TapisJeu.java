@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -33,7 +34,7 @@ public class TapisJeu extends AppCompatActivity {
     Partie partie = null;
     Plateau plateau = null;
     LinearLayout linearCards = null;
-    LinearLayout surface[] = null;
+    FrameLayout surface[] = null;
     RelativeLayout re = null;
     CarteUI[] mainJoueurUI = null, cartePlateauUI;
     Activity tapisJeuActivity = null;
@@ -100,7 +101,7 @@ public class TapisJeu extends AppCompatActivity {
         linearCards.setPadding(0, 15, 0, 0);
         mainJoueurUI = new CarteUI[13];
 
-        surface = new LinearLayout[4];
+        surface = new FrameLayout[4];
         cartePlateauUI= new CarteUI[4];
 
         re = (RelativeLayout) findViewById(R.id.relativeL);
@@ -113,15 +114,12 @@ public class TapisJeu extends AppCompatActivity {
             linearCards.addView(mainJoueurUI[i]);
         }
 
-        surface[0] = (LinearLayout) findViewById(R.id.carteJ1);
-        surface[1] = (LinearLayout) findViewById(R.id.carteJ2);
-        surface[2] = (LinearLayout) findViewById(R.id.carteJ3);
-        surface[3] = (LinearLayout) findViewById(R.id.carteJ4);
-
+        surface[0] = (FrameLayout) findViewById(R.id.carteJ1);
+        surface[1] = (FrameLayout) findViewById(R.id.carteJ2);
+        surface[2] = (FrameLayout) findViewById(R.id.carteJ3);
+        surface[3] = (FrameLayout) findViewById(R.id.carteJ4);
         for(int i = 0; i < 4; ++i) {
             cartePlateauUI[i] = new CarteUI(this);
-
-
             surface[i].addView(cartePlateauUI[i]);
 
         }
@@ -319,7 +317,11 @@ public class TapisJeu extends AppCompatActivity {
         Carte[] cart = plateau.playableCards( cartt );
         setCardPlayable(cart);
 
-
+        try {
+            //maj graphique
+            re.postInvalidate();
+        }catch (Exception e){
+        }
         do {//tant que la carte n'a pas été jouée
             it = grantedExchangePlay();
             try {

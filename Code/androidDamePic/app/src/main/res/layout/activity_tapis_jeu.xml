@@ -17,40 +17,59 @@
     tools:context="ceri.androiddamepic.TapisJeu">
 
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="60dp"
-        android:layout_height="80dp"
+    <FrameLayout
+        android:layout_width="50dp"
+        android:layout_height="70dp"
         android:id="@+id/carteJ1"
         android:layout_centerHorizontal="true"
         >
-    </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="60dp"
-        android:layout_height="80dp"
+        <!--<FrameLayout
+            android:layout_width="match_parent"
+            android:id="@+id/carteJ11"
+            android:layout_height="match_parent"></FrameLayout>-->
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="50dp"
+        android:layout_height="70dp"
         android:id="@+id/carteJ2"
         android:layout_below="@+id/carteJ1"
-        android:layout_toEndOf="@+id/carteJ3"></LinearLayout>
+        android:layout_toEndOf="@+id/carteJ3">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="60dp"
-        android:layout_height="80dp"
+        <!--<FrameLayout
+            android:layout_width="match_parent"
+            android:id="@+id/carteJ22"
+
+            android:layout_height="match_parent"></FrameLayout>-->
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="50dp"
+        android:layout_height="70dp"
         android:id="@+id/carteJ3"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true">
 
-    </LinearLayout>
+        <!-- <FrameLayout
+             android:layout_width="match_parent"
+             android:id="@+id/carteJ33"
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="60dp"
-        android:layout_height="80dp"
-        android:id="@+id/carteJ4"
-        android:layout_below="@+id/carteJ1"
-        android:layout_toStartOf="@+id/carteJ1"></LinearLayout>
+             android:layout_height="match_parent"></FrameLayout>-->
+     </FrameLayout>
+
+     <FrameLayout
+         android:layout_width="50dp"
+         android:layout_height="70dp"
+         android:id="@+id/carteJ4"
+         android:layout_below="@+id/carteJ1"
+         android:layout_toStartOf="@+id/carteJ1">
+
+        <!-- <FrameLayout
+             android:layout_width="match_parent"
+             android:id="@+id/carteJ44"
+             android:layout_height="match_parent"></FrameLayout>-->
+    </FrameLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -58,17 +77,17 @@
         android:layout_height="80dp"
         android:id="@+id/linear"
 
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/carteJ3"
-        android:layout_alignParentStart="true"></LinearLayout>
+    android:layout_alignParentBottom="true"
+    android:layout_toEndOf="@+id/carteJ3"
+    android:layout_alignParentStart="true"></LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:text="Valider"
-        android:id="@+id/buttonVal"
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="70dp"
+    android:text="Valider"
+    android:id="@+id/buttonVal"
 
-        android:layout_above="@+id/linear"
-        android:layout_alignEnd="@+id/linear" />
+    android:layout_above="@+id/linear"
+    android:layout_alignEnd="@+id/linear" />
 
 </RelativeLayout>

@@ -352,7 +352,7 @@ public class CarteUI extends ImageButton {
                     mem = R.drawable.valetp;
                     break;
                 case 12:
-                    mem = R.drawable.rainep;
+                    mem = R.drawable.reinep;
                     break;
                 case 13:
                     mem = R.drawable.roip;

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class TapisJeu extends AppCompatActivity {
     Plateau plateau = null;
     LinearLayout linearCards = null;
     FrameLayout surface[] = null;
+    TextView labelPoints[] = null;
     RelativeLayout re = null;
     CarteUI[] mainJoueurUI = null, cartePlateauUI;
     Activity tapisJeuActivity = null;
@@ -63,11 +65,28 @@ public class TapisJeu extends AppCompatActivity {
         miseAJourTapis(true);
         try {
             valdButton.setText("tour suivant");
-        }catch(Exception e){}
-        try {
-            //maj graphique
+        }catch (Exception e) {
+        }
+
+        IPlayer player = plateau.whoIsbig();
+        for( int i = 0 ; i < playerss.length ; ++i ){
+            if(player == playerss[i]){
+                try {
+                    int iconColor = Color.RED;
+                    cartePlateauUI[i].getBackground().setColorFilter(iconColor, PorterDuff.Mode.MULTIPLY );
+                }catch(Exception e){
+
+                }
+                //break;
+            }
+        }
+
+        mThread.writeLabel();
+
+        //maj graphique
+        try{
             re.postInvalidate();
-        }catch (Exception e){
+        }catch (Exception e) {
         }
 
         writeToast("Appuyer sur valider pour continuer");
@@ -103,6 +122,7 @@ public class TapisJeu extends AppCompatActivity {
 
         surface = new FrameLayout[4];
         cartePlateauUI= new CarteUI[4];
+        labelPoints = new TextView[4];
 
         re = (RelativeLayout) findViewById(R.id.relativeL);
 
@@ -113,6 +133,11 @@ public class TapisJeu extends AppCompatActivity {
             mainJoueurUI[i].linkTapisJeu(this);
             linearCards.addView(mainJoueurUI[i]);
         }
+
+        labelPoints[0] = (TextView) findViewById(R.id.textView2);
+        labelPoints[1] = (TextView) findViewById(R.id.textView);
+        labelPoints[2] = (TextView) findViewById(R.id.textView3);
+        labelPoints[3] = (TextView) findViewById(R.id.textView4);
 
         surface[0] = (FrameLayout) findViewById(R.id.carteJ1);
         surface[1] = (FrameLayout) findViewById(R.id.carteJ2);
@@ -471,6 +496,21 @@ public class TapisJeu extends AppCompatActivity {
                 public void run() {
 
                     Toast.makeText(TapisJeu.this, s, Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
+        public void writeLabel(){
+            Log.d("TapisJeu", "C: Connecting...");
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    try {
+                        labelPoints[0].setText("Ouest: " + playerss[0].getPoint() + " pts");
+                        labelPoints[1].setText("Nord: " + playerss[1].getPoint() + " pts");
+                        labelPoints[2].setText("Est: " + playerss[2].getPoint() + " pts");
+                        labelPoints[3].setText("Sud: " + playerss[3].getPoint() + " pts");
+
+                    }catch(Exception e){System.out.println(e.toString());}
                 }
             });
         }

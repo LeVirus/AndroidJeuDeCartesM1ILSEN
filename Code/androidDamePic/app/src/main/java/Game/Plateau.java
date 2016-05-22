@@ -8,7 +8,6 @@ public class Plateau implements Game.IPlateau
 {
 	//Les quatres joueurs présents
 	private IPlayer[] players;
-	
 	//Stock les cartes en jeu et qui les a joué ce tour-ci
 	private ArrayList<IPlayer> playerForCard;
 	private ArrayList<Carte> cardOnBoard;
@@ -19,7 +18,7 @@ public class Plateau implements Game.IPlateau
 	private boolean coeurPlayed;
 	
 	private static boolean debug = false;
-	
+
 	public Plateau(IPlayer[] p)
 	{
 		players = p;
@@ -43,6 +42,7 @@ public class Plateau implements Game.IPlateau
 	
 	//----------------------------------------------Méthodes pour les IPlayer
 	
+
 
 	public int getPositionOnTurn()
 	{
@@ -113,6 +113,7 @@ public class Plateau implements Game.IPlateau
 	{
 		Carte bc=cardOnBoard.get(0);int n=0;
 		for(int i=0;i<4;i++)	if(cardOnBoard.get(i).compareValue(bc)==1)	{bc=cardOnBoard.get(i);n=i;}
+
 		return playerForCard.get(n);
 	}
 	

@@ -18,6 +18,8 @@ import Game.Carte;
 public class CarteUI extends ImageButton {
     private int couleur;
     private int valeur;
+    public static boolean sonactif;
+
     //private int position;
     private boolean actif = false;
     static Bitmap bitmapCarte = null;
@@ -47,6 +49,7 @@ public class CarteUI extends ImageButton {
             public void onClick(View v) {
                 try {
                     if (actif == false) return;
+                    if(sonactif)soundPlayer.playSong(R.raw.carte_play, tapisJeu);
                     selected = !selected;
                     if (selected) {//modifier la transparence
                         tapisJeu.deselectCartesJeu();

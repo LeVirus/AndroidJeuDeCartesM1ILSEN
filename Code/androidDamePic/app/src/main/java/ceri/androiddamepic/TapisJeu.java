@@ -79,7 +79,7 @@ public class TapisJeu extends AppCompatActivity {
         }catch (Exception e) {
         }
 
-        writeToast("Appuyer sur valider pour continuer");
+        writeToast("Appuyer sur \"Tour suivant\" pour continuer");
         do{
             try{
                 mThread.sleep(500);

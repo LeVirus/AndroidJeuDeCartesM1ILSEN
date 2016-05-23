@@ -234,7 +234,6 @@ public class TapisJeu extends AppCompatActivity {
         reinitCardsPlateau();
         boolean finTour = false;
 
-        System.out.println( "tout ex " + memPlace);
         //récup des cartes jouées du plateau
         Carte[] carteP = plateau.getPlayCards();
 

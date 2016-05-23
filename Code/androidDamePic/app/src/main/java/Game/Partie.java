@@ -128,11 +128,11 @@ public class Partie
 			plateau.addCard(currentPlayer, currentPlayer.playCard());
 		//On détèrmine qui à perdu
 		IPlayer r = plateau.whoIsbig();
-		
 		//On ajoute les points du plateau au perdant
 		r.addPoint(plateau.pointOnboard());
 
 		tapisAndroidP.refreshScreenEndTurn();
+
 
 		plateau.clearTurn();
 		return r;

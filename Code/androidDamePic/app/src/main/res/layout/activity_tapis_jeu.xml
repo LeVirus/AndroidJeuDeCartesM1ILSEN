@@ -4,8 +4,8 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:configChanges="orientation"
     android:screenOrientation="landscape"
+    android:configChanges="orientation|screenSize"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/relativeL"
@@ -17,12 +17,13 @@
     tools:context="ceri.androiddamepic.TapisJeu">
 
 
+
     <FrameLayout
         android:layout_width="50dp"
         android:layout_height="70dp"
         android:id="@+id/carteJ1"
-        android:layout_centerHorizontal="true"
-        >
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
 
     </FrameLayout>
 
@@ -30,8 +31,8 @@
         android:layout_width="50dp"
         android:layout_height="70dp"
         android:id="@+id/carteJ2"
-        android:layout_below="@+id/carteJ1"
-        android:layout_toEndOf="@+id/carteJ3">
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true">
 
     </FrameLayout>
 
@@ -39,28 +40,30 @@
         android:layout_width="50dp"
         android:layout_height="70dp"
         android:id="@+id/carteJ3"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
+        android:layout_above="@+id/linear"
+        android:layout_alignStart="@+id/carteJ1">
 
-     </FrameLayout>
+    </FrameLayout>
 
      <FrameLayout
-         android:layout_width="50dp"
-         android:layout_height="70dp"
+         android:layout_width="50sp"
+         android:layout_height="70sp"
          android:id="@+id/carteJ4"
-         android:layout_below="@+id/carteJ1"
-         android:layout_toStartOf="@+id/carteJ1">
+         android:layout_alignTop="@+id/carteJ2"
+         android:layout_alignParentStart="true">
 
     </FrameLayout>
 
     <LinearLayout
         android:orientation="horizontal"
-        android:layout_width="800dp"
-        android:layout_height="80dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/linear"
+        android:gravity="center"
 
     android:layout_alignParentBottom="true"
     android:layout_toEndOf="@+id/carteJ3"
+        android:layout_weight="4"
     android:layout_alignParentStart="true"></LinearLayout>
 
 <Button
@@ -69,43 +72,43 @@
     android:text="Valider"
     android:id="@+id/buttonVal"
 
-    android:layout_above="@+id/linear"
-    android:layout_alignEnd="@+id/linear" />
+    android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Nord: 0 pts"
         android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/textView4" />
+        android:layout_below="@+id/carteJ1"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Ouest: 0 pts"
         android:id="@+id/textView2"
-        android:layout_above="@+id/carteJ3"
-        android:layout_toStartOf="@+id/carteJ4" />
+        android:layout_alignTop="@+id/textView3"
+        android:layout_toEndOf="@+id/carteJ4" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Est: 0 pts"
         android:id="@+id/textView3"
-        android:layout_alignBottom="@+id/textView2"
-        android:layout_toEndOf="@+id/carteJ2" />
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/carteJ2" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Sud: 0 pts"
         android:id="@+id/textView4"
-        android:layout_above="@+id/linear"
+        android:layout_above="@+id/carteJ3"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

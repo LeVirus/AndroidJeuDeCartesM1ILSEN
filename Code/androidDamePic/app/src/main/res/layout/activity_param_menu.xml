@@ -20,14 +20,25 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Activer le son"
+            android:text="Activer effet sonore"
             android:id="@+id/checkSound"
             android:layout_gravity="center_horizontal"
             android:textSize="35dp"
             android:textColor="#FFFFFF"
-            android:checked="true"
             android:onClick="onClick"
             android:clickable="true" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Activer musique"
+            android:textColor="#FFFFFF"
+            android:textSize="35dp"
+
+            android:id="@+id/checkMusic"
+            android:onClick="onClick"
+            android:layout_gravity="center_horizontal"
+             />
 
         <TextView
             android:layout_width="wrap_content"

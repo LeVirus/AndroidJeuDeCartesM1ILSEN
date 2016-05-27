@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -26,12 +27,13 @@ import Game.structGameStat;
 import Player.IAPlayer;
 import Player.UIPlayer;
 
-public class TapisJeu extends AppCompatActivity {
+public class TapisJeu extends AppCompatActivity{
 
     boolean partieLance = false;
     boolean validGranted = false;
     boolean majGraph = false;
     boolean phaseJeu = false;
+    public static boolean sonactif;
     IPlayer playerss[] = null;
     Partie partie = null;
     Plateau plateau = null;
@@ -45,17 +47,42 @@ public class TapisJeu extends AppCompatActivity {
     GameThread mThread = new GameThread();
     ArrayList<Carte> mainJoueurT;
     int memPlace = -1;
+    CheckBox cb = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tapis_jeu);
-
+        cb =(CheckBox)findViewById(R.id.checkBox);
         initPlateau();
 
+
         mThread.start();
+        cb.setChecked(sonactif);
+        cb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    sonactif = cb.isChecked();
+
+                    if(sonactif)soundPlayer.playSongLoop(R.raw.freezed_64kb, tapisJeuActivity);
+                    else soundPlayer.killAllSong();
+                    System.out.println("act?+"+v.getId());
+                }catch (Exception e){}
+            }
+        });
+        if(sonactif)soundPlayer.playSongLoop(R.raw.freezed_64kb, this);
 
     }
+
+    @Override
+    protected void onDestroy() {
+        soundPlayer.killAllSong();
+        super.onDestroy();
+
+    }
+
+
 
     /**
      * Fonction appelé en fin de tours(les 4 joueurs ont joués).

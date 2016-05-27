@@ -115,6 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Music"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/checkBox"
         android:textColor="#FFFFFF"
         android:checked="false"

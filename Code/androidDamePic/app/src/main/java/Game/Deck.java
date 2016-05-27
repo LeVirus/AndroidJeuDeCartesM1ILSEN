@@ -32,7 +32,7 @@ public class Deck
 		static Carte[] creatColoredCardSet(color c)
 		{
 			Carte[] r = new Carte[13];
-			for(int i=0;i<13;i++)	r[i] = new Carte(i,c);
+			for(int i=0;i<13;i++)	r[i] = new Carte(i+2,c);
 			return r;
 		}
 

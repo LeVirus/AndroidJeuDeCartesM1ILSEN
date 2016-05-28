@@ -67,7 +67,6 @@ public class TapisJeu extends AppCompatActivity{
 
                     if(sonactif)soundPlayer.playSongLoop(R.raw.freezed_64kb, tapisJeuActivity);
                     else soundPlayer.killAllSong();
-                    System.out.println("act?+"+v.getId());
                 }catch (Exception e){}
             }
         });
@@ -154,7 +153,7 @@ public class TapisJeu extends AppCompatActivity{
         initValidateButton();
         linearCards = (LinearLayout) findViewById(R.id.linear);
 
-        linearCards.setPadding(0, 15, 0, 0);
+        //linearCards.setPadding(0, 15, 0, 0);
         mainJoueurUI = new CarteUI[13];
 
         surface = new FrameLayout[4];
@@ -164,11 +163,14 @@ public class TapisJeu extends AppCompatActivity{
         re = (RelativeLayout) findViewById(R.id.relativeL);
 
 
+
         //Main joueur
         for(int i = 0; i < 13; ++i) {
             mainJoueurUI[i] = new CarteUI(this);
             mainJoueurUI[i].linkTapisJeu(this);
-            linearCards.addView(mainJoueurUI[i]);
+            FrameLayout fl = (FrameLayout)linearCards.getChildAt(i);
+            fl.addView(mainJoueurUI[i]);
+            //linearCards.addView(mainJoueurUI[i]);
         }
 
         labelPoints[0] = (TextView) findViewById(R.id.textView2);

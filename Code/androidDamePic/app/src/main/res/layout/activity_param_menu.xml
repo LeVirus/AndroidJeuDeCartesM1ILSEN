@@ -23,7 +23,7 @@
             android:text="Activer effet sonore"
             android:id="@+id/checkSound"
             android:layout_gravity="center_horizontal"
-            android:textSize="35dp"
+            android:textSize="@dimen/textesp"
             android:textColor="#FFFFFF"
             android:onClick="onClick"
             android:clickable="true" />
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:text="Activer musique"
             android:textColor="#FFFFFF"
-            android:textSize="35dp"
+            android:textSize="@dimen/textesp"
 
             android:id="@+id/checkMusic"
             android:onClick="onClick"
@@ -47,7 +47,7 @@
             android:text="Retour"
             android:id="@+id/retour"
             android:paddingTop="30dp"
-            android:textSize="35dp"
+            android:textSize="@dimen/textesp"
             android:textColor="#FFFFFF"
             android:layout_gravity="center_horizontal"
             android:onClick="onClick"

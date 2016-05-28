@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Scores"
-            android:textSize="30dp"
+            android:textSize="@dimen/textesp"
             android:id="@+id/textView"
             android:layout_gravity="center_horizontal"
             android:textColor="#ffffff" />
@@ -38,7 +38,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/textetapissp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Vous : "
             android:id="@+id/player1"
             android:layout_gravity="center_horizontal"
@@ -48,7 +49,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/textetapissp"
+
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Nord : "
             android:id="@+id/player2"
             android:layout_gravity="center_horizontal"
@@ -58,7 +61,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/textetapissp"
+
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Est : "
             android:id="@+id/player3"
             android:layout_gravity="center_horizontal"
@@ -68,7 +73,9 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="@dimen/textetapissp"
+
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Ouest : "
             android:id="@+id/player4"
             android:layout_gravity="center_horizontal"

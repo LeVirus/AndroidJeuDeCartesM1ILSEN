@@ -65,12 +65,12 @@ public class TapisJeu extends AppCompatActivity{
                 try {
                     sonactif = cb.isChecked();
 
-                    if(sonactif)soundPlayer.playSongLoop(R.raw.freezed_64kb, tapisJeuActivity);
+                    if(sonactif)soundPlayer.playSongLoop(R.raw.crasyb, tapisJeuActivity);
                     else soundPlayer.killAllSong();
                 }catch (Exception e){}
             }
         });
-        if(sonactif)soundPlayer.playSongLoop(R.raw.freezed_64kb, this);
+        if(sonactif)soundPlayer.playSongLoop(R.raw.crasyb, this);
 
     }
 

@@ -96,7 +96,7 @@ public class TapisJeu extends AppCompatActivity{
         }catch (Exception e) {
         }
 
-        //showHandGained();
+        showHandGained();
 
         mThread.writeLabel();
 
@@ -133,6 +133,8 @@ public class TapisJeu extends AppCompatActivity{
             if(player == playerss[i]){
                 try {
                     int iconColor = Color.RED;
+                    i--;
+                    if(i<0)i=3;
                     cartePlateauUI[i].getBackground().setColorFilter(iconColor, PorterDuff.Mode.MULTIPLY );
                 }catch(Exception e){
 

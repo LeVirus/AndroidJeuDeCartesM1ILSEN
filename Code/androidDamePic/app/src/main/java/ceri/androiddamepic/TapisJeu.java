@@ -65,9 +65,10 @@ public class TapisJeu extends AppCompatActivity{
                 try {
                     sonactif = cb.isChecked();
 
-                    if(sonactif)soundPlayer.playSongLoop(R.raw.crasyb, tapisJeuActivity);
+                    if (sonactif) soundPlayer.playSongLoop(R.raw.crasyb, tapisJeuActivity);
                     else soundPlayer.killAllSong();
-                }catch (Exception e){}
+                } catch (Exception e) {
+                }
             }
         });
         if(sonactif)soundPlayer.playSongLoop(R.raw.crasyb, this);
@@ -398,7 +399,7 @@ public class TapisJeu extends AppCompatActivity{
 
         Carte[] cartt =Arrays.copyOf(mainJoueur.toArray(), mainJoueur.toArray().length, Carte[].class);
         Carte[] cart = plateau.playableCards( cartt );
-        setCardPlayable(cart);
+        setCardPlayable(cart, mainJoueur.size());
 
         try {
             //maj graphique
@@ -429,7 +430,7 @@ public class TapisJeu extends AppCompatActivity{
      *   Détermine a partir du package Game quelles cartes sont jouables et fais les modifications en
      *   conséquences dans la main du joueur.
      */
-    void setCardPlayable(Carte[] cart){
+    void setCardPlayable(Carte[] cart, int taille){
         boolean notPlayable = true;
         for(CarteUI c: mainJoueurUI){
             notPlayable = true;
@@ -453,6 +454,7 @@ public class TapisJeu extends AppCompatActivity{
                 c.setActive(false);
             }
         }
+        for(int i = taille;i<mainJoueurUI.length;++i)mainJoueurUI[i].setActive(false);
     }
 
     /**

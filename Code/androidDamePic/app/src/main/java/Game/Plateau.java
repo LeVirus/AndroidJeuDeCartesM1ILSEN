@@ -196,7 +196,9 @@ public class Plateau implements Game.IPlateau
 	public void resetPlayersHand()
 	{
 		Carte[][] c = Deck.createFourPlayerHand();
-		for(int i=0;i<4;i++)	players[i].setHand(c[i]);
+		for(int i=0;i<4;i++){
+			players[i].setHand(c[i]);
+		}
 	}
 	
 	//Demande aux joueur d'échanger leurs cartes

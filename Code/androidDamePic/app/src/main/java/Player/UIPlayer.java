@@ -33,6 +33,8 @@ public class UIPlayer extends abstractPlayer implements IPlayer
     @Override
     public Carte playCard()
     {
+        carteEnMain = sortHand(carteEnMain);
+
         //On rafraichie le plateau de jeu
         //gameActivity.refreshScreen();
         try {
@@ -40,7 +42,6 @@ public class UIPlayer extends abstractPlayer implements IPlayer
             //Toast.makeText(context, "A votre tour.", Toast.LENGTH_LONG).show();
         }catch (Exception e){System.out.println( e.toString() );}
         lock.lock();
-        carteEnMain = sortHand(carteEnMain);
         int c = gameActivity.playCard(carteEnMain);
         Carte r = carteEnMain.get(c);
         carteEnMain.remove(c);
@@ -55,6 +56,7 @@ public class UIPlayer extends abstractPlayer implements IPlayer
     @Override
     public Carte[] exchangeCards()
     {
+        carteEnMain = sortHand(carteEnMain);
 
         Log.d("TapisJeu", "C: Connecting...");
 
@@ -75,7 +77,6 @@ public class UIPlayer extends abstractPlayer implements IPlayer
             carteEnMain.remove(t[i]);
         }
 
-        lock.lock();lock.unlock();
         //TODO: retourner les cartes chosie.
         return r;
     }

@@ -555,7 +555,7 @@ public class TapisJeu extends AppCompatActivity{
             runOnUiThread(new Runnable() {
                 public void run() {
 
-                    Toast.makeText(TapisJeu.this, s, Toast.LENGTH_LONG).show();
+                    Toast.makeText(TapisJeu.this, s, Toast.LENGTH_SHORT).show();
                 }
             });
         }

@@ -54,7 +54,8 @@ public class CarteUI extends ImageButton {
                     if (selected) {//modifier la transparence
                         tapisJeu.deselectCartesJeu();
                         selected = true;
-                        memCart.getBackground().setColorFilter(Color.argb(100, 0, 0, 0), PorterDuff.Mode.DST_IN);
+                        memCart.getBackground().setColorFilter(Color.GREEN, PorterDuff.Mode.MULTIPLY );
+                        //memCart.getBackground().setColorFilter(Color.argb(70, 0, 0, 0), PorterDuff.Mode.DST_IN);
 
                     } else {
                         memCart.getBackground().setColorFilter(Color.argb(255, 255, 255, 255), PorterDuff.Mode.DST_IN);

@@ -138,6 +138,8 @@ public class CarteUI extends ImageButton {
             this.setBackground(null);
         }catch (Exception e){
         }
+        this.couleur = -1;
+        this.valeur = -1;
 
     }
 
